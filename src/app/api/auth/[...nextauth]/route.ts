@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { dbConfig } from "../../../../../lib/dbConntect";
+import User from "../../../../../models/user";
 
 const handler = NextAuth({
   providers: [
@@ -11,17 +13,24 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        const user = { id: "1", name: "smith", email: "example@gmail.com" };
+        const db = dbConfig();
 
-        if (user) return user;
+        const user = await User.findOne({
+          username: credentials?.password,
+        });
+
+        if (user)
+          return {
+            id: user.id,
+          };
         else return null;
       },
     }),
   ],
-  secret: process.env.JWT_SECRET,
   pages: {
     signIn: "/login",
   },
+  secret: process.env.JWT_SECRET,
 });
 
 export { handler as GET, handler as POST };
