@@ -1,5 +1,11 @@
+"use client";
+
+import { store } from "@/redux/store";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 import NextAuthProvider from "./providers";
 
@@ -12,10 +18,13 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
-      </body>
-    </html>
+    <Provider store={store}>
+      <html lang="en">
+        <body className={inter.className}>
+          <ToastContainer />
+          <NextAuthProvider>{children}</NextAuthProvider>
+        </body>
+      </html>
+    </Provider>
   );
 }

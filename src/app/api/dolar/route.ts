@@ -80,7 +80,7 @@ export const GET = async () => {
   } catch (error) {
     NextResponse.json(
       {
-        message: "error",
+        message: error,
       },
       {
         status: 500,

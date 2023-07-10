@@ -3,13 +3,13 @@
 import InputRadio from "@/app/dashboard/components/InputRadio";
 import InputText from "@/app/dashboard/components/InputText";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { formatDateYYYYmmdd } from "../../../../../../lib/formatDate";
 import {
   AssetsEnum,
   BillsEnum,
   TypeOfCurrencyEnum,
 } from "../../../../../../types/enums/dashboard";
 import { Bill } from "../../../../../../types/types/bill";
+import { formatDateYYYYmmdd } from "../../../../../lib/formatDate";
 import { typesOfBills } from "../config/bills";
 import ListBillType from "./ListBillType";
 
@@ -33,7 +33,6 @@ const FormCreateBill = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(FormData);
     setFormData(initialStateForm);
   };
 

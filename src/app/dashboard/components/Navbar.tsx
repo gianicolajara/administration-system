@@ -1,14 +1,17 @@
+import { getPriceCOP, getPriceUSD } from "@/services/currency";
 import { Suspense } from "react";
-import { getAllCurrency } from "../../../../services/currency";
-import { CurrencyReponseAPI } from "../../../../types/types/currency";
 import CurrencyItems from "./CurrencyItems";
 
-const Navbar = async () => {
-  const currencyData: Promise<CurrencyReponseAPI> = getAllCurrency();
+const Navbar = () => {
+  const promiseUSDTOVEF = getPriceUSD();
+  const promiseUSDTOCOP = getPriceCOP();
 
   return (
     <Suspense fallback={<h2 className="text-white">loading...</h2>}>
-      <CurrencyItems promise={currencyData} />
+      <CurrencyItems
+        promiseCOP={promiseUSDTOCOP}
+        promiseVEF={promiseUSDTOVEF}
+      />
     </Suspense>
   );
 };

@@ -4,6 +4,7 @@ export const menuItems: Array<MenuItemDashboard> = [
   {
     id: 1,
     title: "Facturas",
+    originalTitle: "bills",
     url: "#",
     subitems: [
       {
@@ -17,5 +18,11 @@ export const menuItems: Array<MenuItemDashboard> = [
         url: "/dashboard/bills/bills",
       },
     ],
+  },
+  {
+    id: 2,
+    title: "Usuarios",
+    url: "/dashboard/users",
+    originalTitle: "users",
   },
 ];

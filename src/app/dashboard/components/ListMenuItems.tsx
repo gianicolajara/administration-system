@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { MenuItemDashboard } from "../../../../types/types/dashboard";
 import MenuItem from "./MenuItem";
 
@@ -7,12 +8,23 @@ type Props = {
 };
 
 const ListMenuItems = ({ listItems }: Props) => {
+  const [activeItem, setActiveItem] = useState(0);
+
+  const handleActiveItem = (newActiveItem: number) => {
+    if (activeItem !== newActiveItem) setActiveItem(newActiveItem);
+  };
+
   return (
-    <>
+    <ul className="flex flex-col">
       {listItems.map((item) => (
-        <MenuItem item={item} key={item.id} />
+        <MenuItem
+          item={item}
+          handleActiveItem={handleActiveItem}
+          activeItem={activeItem}
+          key={item.id}
+        />
       ))}
-    </>
+    </ul>
   );
 };
 

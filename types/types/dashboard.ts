@@ -2,7 +2,8 @@ export type MenuItemDashboard = {
   id: number;
   title: string;
   url: string;
-  subitems?: Array<MenuItemDashboard>;
+  subitems?: Array<Partial<MenuItemDashboard>>;
+  originalTitle: string;
 };
 
 export type BillsType = {
