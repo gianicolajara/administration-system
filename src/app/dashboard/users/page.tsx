@@ -1,30 +1,33 @@
 "use client";
 
 import { useGetAllUsersQuery } from "@/redux/services";
+import { useState } from "react";
 import FormCreateUser from "./components/FormCreateUser";
 import ListOfUsers from "./components/ListOfUsers";
 
 const Users = () => {
-  /* const [users, setUsers] = useState<Array<IUser>>([]); */
+  const { data, isLoading } = useGetAllUsersQuery("Users");
 
-  /*  const { data: dataUsers, successfully: successfullyUsers } = useFetch({
-    url: "http://localhost:3000/api/users",
-    method: "GET",
-    start: true,
-  }); */
-
-  /*  useEffect(() => {
-    if (successfullyUsers) {
-      setUsers((dataUsers as { message: string; users: Array<IUser> }).users);
-    }
-  }, [dataUsers, successfullyUsers]); */
-
-  const { data, isLoading } = useGetAllUsersQuery("usersApi");
+  const [formDataUser, setFormDataUser] = useState<{
+    id?: string;
+    username: string;
+    password?: string;
+  }>({
+    username: "",
+    password: "",
+  });
 
   return (
     <section className="grid grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
-      <ListOfUsers users={data} loading={isLoading} />
-      <FormCreateUser />
+      <ListOfUsers
+        users={data}
+        loading={isLoading}
+        setFormDataUser={setFormDataUser}
+      />
+      <FormCreateUser
+        setFormDataUser={setFormDataUser}
+        formDataUser={formDataUser}
+      />
     </section>
   );
 };

@@ -15,7 +15,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <ListMenuItems listItems={menuItems} />
         </nav>
         <div className="w-full h-full flex flex-col">
-          <div className="w-full h-[75px] border-b-2 border-slate-800 flex-grow-0 flex-shrink-0 p-4">
+          <div className="w-full h-[75px] border-b-2 border-slate-800 flex-grow-0 flex-shrink-0 p-4 flex items-center">
             <Navbar />
           </div>
           <div className="w-full h-full text-white p-5 overflow-y-scroll overflow-x-hidden">

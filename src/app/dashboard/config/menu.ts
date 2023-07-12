@@ -25,4 +25,22 @@ export const menuItems: Array<MenuItemDashboard> = [
     url: "/dashboard/users",
     originalTitle: "users",
   },
+  {
+    id: 3,
+    title: "Configuración",
+    url: "/dashboard/configuration",
+    originalTitle: "configuration",
+    subitems: [
+      {
+        id: 4,
+        title: "Monedas",
+        url: "/dashboard/configuration/currency",
+      },
+      {
+        id: 5,
+        title: "Cambios",
+        url: "/dashboard/configuration/changes",
+      },
+    ],
+  },
 ];

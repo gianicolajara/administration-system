@@ -23,6 +23,10 @@ const UserSchema = new Schema<IUser, IUserModelMethods, IUserModelMethods>(
         "Porfavor inserte una contraseña segura",
       ],
     },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

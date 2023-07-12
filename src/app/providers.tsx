@@ -7,8 +7,8 @@ type Props = {
   children?: ReactNode;
 };
 
-function NextAuthProvider({ children }: Props) {
-  return <SessionProvider>{children}</SessionProvider>;
+function NextAuthProvider(props: Props) {
+  return <SessionProvider>{props.children}</SessionProvider>;
 }
 
 export default NextAuthProvider;

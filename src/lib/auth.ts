@@ -14,8 +14,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         const db = dbConfig();
 
-        /* console.log({ credentials }); */
-
         db.connectDB();
 
         const user = await User.findOne({
@@ -23,6 +21,8 @@ export const authOptions: NextAuthOptions = {
         });
 
         if (!user) throw new Error("Contraseña o Nombre incorrecto");
+
+        if (!user.active) throw new Error("Usuario no valido para logear");
 
         const comparePassword = user.comparePassword(
           credentials?.password || "",
@@ -43,4 +43,22 @@ export const authOptions: NextAuthOptions = {
     signIn: "/login",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      if (user) {
+        token.user = {
+          id: user.id,
+          username: user.username,
+        };
+      }
+      return token;
+    },
+    session: async ({ session, token }) => {
+      if (token) {
+        session.user = token.user;
+      }
+
+      return session;
+    },
+  },
 };

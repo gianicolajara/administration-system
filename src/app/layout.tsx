@@ -2,10 +2,11 @@
 
 import { store } from "@/redux/store";
 import { Inter } from "next/font/google";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { LoadingLayout } from "./components/LoadingLoyout";
 import "./globals.css";
 import NextAuthProvider from "./providers";
 
@@ -20,9 +21,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <Provider store={store}>
       <html lang="en">
-        <body className={inter.className}>
+        <body className={`${inter.className} w-screen h-screen bg-slate-950`}>
           <ToastContainer />
           <NextAuthProvider>{children}</NextAuthProvider>
+          <Suspense fallback={null}>
+            <LoadingLayout />
+          </Suspense>
         </body>
       </html>
     </Provider>

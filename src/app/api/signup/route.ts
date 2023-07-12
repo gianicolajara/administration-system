@@ -18,7 +18,7 @@ export const POST = async (req: Request) => {
             "No todos los datos requeridos fueron ingresados, intentelo de nuevo",
         },
         {
-          status: 401,
+          status: 400,
         }
       );
     }

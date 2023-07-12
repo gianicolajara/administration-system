@@ -33,6 +33,7 @@ const FormCreateBill = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(FormData);
     setFormData(initialStateForm);
   };
 

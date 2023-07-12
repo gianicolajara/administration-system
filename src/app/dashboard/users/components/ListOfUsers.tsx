@@ -1,22 +1,54 @@
 "use client";
 
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+
 import { IUser } from "../../../../../types/interfaces/user";
+import InputText from "../../components/InputText";
 import Loader from "../../components/Loader";
+import ItemUser from "./ItemUser";
 
 type Props = {
   users?: Array<IUser>;
   loading: boolean;
+  setFormDataUser: Dispatch<
+    SetStateAction<{
+      id?: string | undefined;
+      username: string;
+      password?: string | undefined;
+    }>
+  >;
 };
 
-const ListOfUsers = ({ users, loading }: Props) => {
+const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
+  const [filter, setFilter] = useState("");
+
+  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFilter(e.target.value);
+  };
+
   if (loading) return <Loader />;
 
-  console.log(users);
+  if (!users) return <p>Algo fue mal</p>;
+  if (users?.length === 0) return <p>Sin Data</p>;
 
-  if (!users) return <p>Something was wrong</p>;
+  const handleSetFormUser = (item: IUser) => {
+    setFormDataUser({
+      id: item.id,
+      username: item.username,
+      password: undefined,
+    });
+  };
 
   return (
-    <div className="border-2 border-slate-800 rounded-lg max-h-full">
+    <div className="">
+      <div className="py-4">
+        <InputText
+          onChange={handleOnChange}
+          value={filter}
+          label="Filtro"
+          name="filter"
+        />
+      </div>
       <table className="w-full border-2 border-slate-800 table-fixed">
         <thead>
           <tr>
@@ -25,19 +57,15 @@ const ListOfUsers = ({ users, loading }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((item) => (
-            <tr key={item.id}>
-              <td className="border-2 border-slate-800 p-4">{item.username}</td>
-              <td className="border-2 border-slate-800 px-2">
-                <button className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 mr-2">
-                  Borrar
-                </button>
-                <button className="p-2 bg-slate-800 rounded-full hover:bg-slate-700">
-                  Editar
-                </button>
-              </td>
-            </tr>
-          ))}
+          {users
+            .filter((item) => item.username.includes(filter))
+            .map((item) => (
+              <ItemUser
+                user={item}
+                handleSetFormUser={handleSetFormUser}
+                key={item.id}
+              />
+            ))}
         </tbody>
       </table>
     </div>
