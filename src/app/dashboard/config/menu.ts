@@ -28,7 +28,7 @@ export const menuItems: Array<MenuItemDashboard> = [
   {
     id: 3,
     title: "Configuración",
-    url: "/dashboard/configuration",
+    url: "#",
     originalTitle: "configuration",
     subitems: [
       {

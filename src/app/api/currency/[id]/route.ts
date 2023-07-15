@@ -1,31 +1,31 @@
 import { onError } from "@/lib/handlers";
-import Changes from "@/models/changes";
+import Money from "@/models/money";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import { IChanges } from "../../../../../types/interfaces/changes";
+import { IMoney } from "../../../../../types/interfaces/money";
 
 export const PUT = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
   try {
-    const body: Partial<IChanges> = await request.json();
+    const body: Partial<IMoney> = await request.json();
 
-    if (!body.amount || !body.from || !body.to) {
+    if (!body.name) {
       return NextResponse.json(
         { message: "Todos los datos no fueron ingresados correctamente" },
         { status: 400 }
       );
     }
 
-    await Changes.findByIdAndUpdate(
-      new mongoose.Types.ObjectId(params.id),
-      body
-    );
+    await Money.findByIdAndUpdate(new mongoose.Types.ObjectId(params.id), body);
 
-    return NextResponse.json({
-      message: "Cambio actualizado correctamente",
-    });
+    return NextResponse.json(
+      {
+        message: "El usuario fue modificado correctamente",
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return onError(error);
   }
@@ -36,15 +36,13 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   try {
-    await Changes.findByIdAndDelete(params.id);
+    await Money.findByIdAndDelete(new mongoose.Types.ObjectId(params.id));
 
     return NextResponse.json(
       {
-        message: "El Cambio fue borrada correctamente",
+        message: "La moneda fue borrada correctamente",
       },
-      {
-        status: 200,
-      }
+      { status: 200 }
     );
   } catch (error) {
     return onError(error);

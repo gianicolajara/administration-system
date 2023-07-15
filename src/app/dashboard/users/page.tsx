@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetAllUsersQuery } from "@/redux/services";
+import { useGetAllUsersQuery } from "@/redux/services/userApi";
 import { useState } from "react";
 import FormCreateUser from "./components/FormCreateUser";
 import ListOfUsers from "./components/ListOfUsers";
@@ -11,7 +11,7 @@ const Users = () => {
   const [formDataUser, setFormDataUser] = useState<{
     id?: string;
     username: string;
-    password?: string;
+    password: string;
   }>({
     username: "",
     password: "",

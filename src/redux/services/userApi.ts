@@ -30,8 +30,6 @@ export const usersApi = createApi({
         return rawResult.users;
       },
     }),
-
-    //http://localhost:3000/api/users/64ad52a80e8bbc56a9839b13
     desactivateUser: builder.mutation({
       invalidatesTags: ["Users"],
       query: (args) => ({

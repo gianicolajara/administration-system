@@ -1,4 +1,4 @@
-import { useDesactivateUserMutation } from "@/redux/services";
+import { useDesactivateUserMutation } from "@/redux/services/userApi";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { IUser } from "../../../../../types/interfaces/user";
 import Loader from "../../components/Loader";
@@ -13,7 +13,7 @@ const ItemUser = ({ user, handleSetFormUser }: Props) => {
   const [desactivate, { isLoading }] = useDesactivateUserMutation();
 
   return (
-    <tr key={user.id}>
+    <>
       <td className="border-2 border-slate-800 p-4">{user.username}</td>
       <td className="border-2 border-slate-800 px-2">
         <button
@@ -36,7 +36,7 @@ const ItemUser = ({ user, handleSetFormUser }: Props) => {
           Editar
         </button>
       </td>
-    </tr>
+    </>
   );
 };
 

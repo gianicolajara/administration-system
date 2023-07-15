@@ -8,5 +8,6 @@ export const config = {
     "/api/money/:path*",
     "/api/signup/:path*",
     "/api/users/:path*",
+    "/api/currency/:path*",
   ],
 };

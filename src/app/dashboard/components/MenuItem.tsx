@@ -17,8 +17,8 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
   const [openItemMenu, setOpenItemMenu] = useState(false);
 
   const pathname = usePathname();
-  const actualPage = pathname.split("/")[3];
-  const actualPrincipalPage = pathname.split("/")[2];
+  const actualPage = pathname?.split("/")[3];
+  const actualPrincipalPage = pathname?.split("/")[2];
 
   useEffect(() => {
     if (activeItem !== item.id) setOpenItemMenu(false);

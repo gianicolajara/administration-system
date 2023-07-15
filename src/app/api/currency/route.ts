@@ -1,0 +1,55 @@
+import dbConfig from "@/lib/dbConntect";
+import { onError } from "@/lib/handlers";
+import Money from "@/models/money";
+import { NextResponse } from "next/server";
+import { IMoney } from "../../../../types/interfaces/money";
+
+export const revalidate = 0;
+
+export const POST = async (request: Request) => {
+  try {
+    const db = dbConfig();
+    db.connectDB();
+
+    const body: IMoney = await request.json();
+
+    if (!body.name) {
+      return NextResponse.json(
+        { message: "Todos los datos no fueron ingresados correctamente" },
+        { status: 400 }
+      );
+    }
+
+    const newMoney = new Money(body);
+
+    const moneySaved = await newMoney.save();
+
+    return NextResponse.json(
+      {
+        message: "Usuario creado satifactoriamente",
+        user: moneySaved,
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (error) {
+    return onError(error);
+  }
+};
+
+export const GET = async () => {
+  try {
+    const db = dbConfig();
+    db.connectDB();
+
+    const currency = await Money.find({});
+
+    return NextResponse.json({
+      message: "Las monedas fueron conseguidos exitosamente",
+      currency: currency ?? [],
+    });
+  } catch (error) {
+    return onError(error);
+  }
+};

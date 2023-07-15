@@ -1,9 +1,10 @@
+import Title from "@/app/components/Title";
 import FormCreateBill from "./Components/FormCreateBill";
 
 const Create = () => {
   return (
     <section className="w-full h-full">
-      <h1 className="text-4xl font-bold mb-5">Crear Factura</h1>
+      <Title>Crear Factura</Title>
       <FormCreateBill />
     </section>
   );

@@ -8,7 +8,7 @@ export const revalidate = 0;
 export const GET = async () => {
   try {
     const db = dbConfig();
-    await db.connectDB();
+    db.connectDB();
 
     const users = await User.find({});
 

@@ -37,7 +37,7 @@ export const POST = async (request: Request) => {
 
 export const GET = async () => {
   try {
-    const changes = await Changes.find({});
+    const changes = await Changes.find({}).populate("from").populate("to");
 
     return NextResponse.json(
       {

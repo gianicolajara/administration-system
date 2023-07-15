@@ -1,5 +1,8 @@
 "use client";
 
+import FieldSet from "@/app/components/FieldSet";
+import Form from "@/app/components/Form";
+import Button from "@/app/dashboard/components/Button";
 import InputRadio from "@/app/dashboard/components/InputRadio";
 import InputText from "@/app/dashboard/components/InputText";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -38,24 +41,15 @@ const FormCreateBill = () => {
   };
 
   return (
-    <form
-      className="border-2 border-slate-800 p-5 rounded-lg"
-      onSubmit={handleSubmit}
-    >
-      <fieldset className="flex gap-x-4 border-2 border-slate-800 p-5">
-        <legend className="bg-white py-1 px-2 rounded-lg text-slate-950 font-bold">
-          Tipo de Factura
-        </legend>
+    <Form onSubmit={handleSubmit}>
+      <FieldSet title="Tipo de Factura">
         <ListBillType
           FormData={FormData}
           onChange={handleOnChange}
           typesOfBills={typesOfBills}
         />
-      </fieldset>
-      <fieldset className="flex gap-x-4 border-2 border-slate-800 p-5 mt-5">
-        <legend className="bg-white py-1 px-2 rounded-lg text-slate-950 font-bold">
-          Activo Financiero
-        </legend>
+      </FieldSet>
+      <FieldSet title="Activo Financiero">
         <label>
           <input
             type="radio"
@@ -78,92 +72,92 @@ const FormCreateBill = () => {
           />
           Egreso
         </label>
-      </fieldset>
-      <fieldset className="flex gap-4 border-2 border-slate-800 p-5 mt-5 flex-col ">
-        <legend className="bg-white py-1 px-2 rounded-lg text-slate-950 font-bold">
-          Datos
-        </legend>
-        <div className="flex w-full gap-x-5">
-          <InputText
-            label="Numero de Factura"
-            name="billNumber"
-            onChange={handleOnChange}
-            value={FormData.billNumber}
-          />
+      </FieldSet>
 
-          <div className="flex flex-col w-full">
-            <label htmlFor="date">Fecha de factura</label>
-            <input
-              type="date"
-              name="date"
-              value={FormData.date}
+      <FieldSet title="Datos">
+        <div className="flex flex-col w-full">
+          <div className="flex w-full gap-x-5">
+            <InputText
+              label="Numero de Factura"
+              name="billNumber"
               onChange={handleOnChange}
-              className="text-white p-2 h-[50px] bg-slate-800"
+              value={FormData.billNumber}
             />
-          </div>
-        </div>
-        <div className="flex w-full gap-x-5 ">
-          <InputText
-            label="Cantidad de dinero"
-            name="amountMoney"
-            onChange={handleOnChange}
-            value={FormData.amountMoney}
-            type="number"
-          />
 
-          <div className="flex w-full h-full flex-col self-center">
-            <label htmlFor="">Tipo de moneda</label>
-            <div className="flex gap-x-4 w-full items-center h-[50px]">
-              <InputRadio
-                name="typeOfCurrency"
-                value={TypeOfCurrencyEnum.Pesos.toString()}
+            <div className="flex flex-col w-full">
+              <label htmlFor="date">Fecha de factura</label>
+              <input
+                type="date"
+                name="date"
+                value={FormData.date}
                 onChange={handleOnChange}
-                label="Pesos"
-                checked={
-                  TypeOfCurrencyEnum.Pesos.toString() ===
-                  FormData.typeOfCurrency
-                }
-              />
-              <InputRadio
-                name="typeOfCurrency"
-                value={TypeOfCurrencyEnum.Dolar.toString()}
-                onChange={handleOnChange}
-                label="Dolar"
-                checked={
-                  TypeOfCurrencyEnum.Dolar.toString() ===
-                  FormData.typeOfCurrency
-                }
-              />
-              <InputRadio
-                name="typeOfCurrency"
-                value={TypeOfCurrencyEnum.Bolivar.toString()}
-                onChange={handleOnChange}
-                label="Bolivar"
-                checked={
-                  TypeOfCurrencyEnum.Bolivar.toString() ===
-                  FormData.typeOfCurrency
-                }
+                className="text-white p-2 h-[50px] bg-slate-800"
               />
             </div>
           </div>
+          <div className="flex w-full gap-x-5 ">
+            <InputText
+              label="Cantidad de dinero"
+              name="amountMoney"
+              onChange={handleOnChange}
+              value={FormData.amountMoney}
+              type="number"
+            />
+
+            <div className="flex w-full h-full flex-col self-center">
+              <label htmlFor="">Tipo de moneda</label>
+              <div className="flex gap-x-4 w-full items-center h-[50px]">
+                <InputRadio
+                  name="typeOfCurrency"
+                  value={TypeOfCurrencyEnum.Pesos.toString()}
+                  onChange={handleOnChange}
+                  label="Pesos"
+                  checked={
+                    TypeOfCurrencyEnum.Pesos.toString() ===
+                    FormData.typeOfCurrency
+                  }
+                />
+                <InputRadio
+                  name="typeOfCurrency"
+                  value={TypeOfCurrencyEnum.Dolar.toString()}
+                  onChange={handleOnChange}
+                  label="Dolar"
+                  checked={
+                    TypeOfCurrencyEnum.Dolar.toString() ===
+                    FormData.typeOfCurrency
+                  }
+                />
+                <InputRadio
+                  name="typeOfCurrency"
+                  value={TypeOfCurrencyEnum.Bolivar.toString()}
+                  onChange={handleOnChange}
+                  label="Bolivar"
+                  checked={
+                    TypeOfCurrencyEnum.Bolivar.toString() ===
+                    FormData.typeOfCurrency
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="report">Reporte</label>
+            <textarea
+              name="report"
+              cols={30}
+              rows={10}
+              onChange={handleOnChange}
+              value={FormData.report}
+              className="resize-none bg-slate-800 rounded p-4"
+              placeholder="Ingrese una descripción o titulo de su factura"
+            />
+          </div>
+          <div className="mt-2 w-full flex justify-center">
+            <Button type="submit">Guardar</Button>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="report">Reporte</label>
-          <textarea
-            name="report"
-            cols={30}
-            rows={10}
-            onChange={handleOnChange}
-            value={FormData.report}
-            className="resize-none bg-slate-800 rounded p-4"
-            placeholder="Ingrese una descripción o titulo de su factura"
-          />
-        </div>
-        <button className="px-8 py-3 bg-purple-600 text-white font-bold rounded-full hover:bg-purple-500 active:bg-purple-950 transition-all">
-          Guardar
-        </button>
-      </fieldset>
-    </form>
+      </FieldSet>
+    </Form>
   );
 };
 

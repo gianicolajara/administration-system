@@ -8,8 +8,6 @@ const CloseSession = () => {
   const [loading, setLoading] = useState(false);
   const { data } = useSession();
 
-  console.log({ data });
-
   const handleLogOut = async () => {
     setLoading(true);
 

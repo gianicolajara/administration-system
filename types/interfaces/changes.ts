@@ -1,9 +1,17 @@
-import mongoose, { Model } from "mongoose";
+import { Model } from "mongoose";
+import { IMoney } from "./money";
 
 export interface IChanges {
   id?: string;
-  from: mongoose.Types.ObjectId;
-  to: mongoose.Types.ObjectId;
+  from: string;
+  to: string;
+  amount: number | string;
+}
+
+export interface IChangesResponse {
+  id?: string;
+  from: IMoney;
+  to: IMoney;
   amount: number;
 }
 

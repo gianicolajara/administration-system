@@ -1,9 +1,10 @@
 "use client";
 
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
+import Table from "@/app/components/Table";
 import { IUser } from "../../../../../types/interfaces/user";
-import InputText from "../../components/InputText";
+import { BodyData, Head } from "../../../../../types/types/table";
 import Loader from "../../components/Loader";
 import ItemUser from "./ItemUser";
 
@@ -12,20 +13,14 @@ type Props = {
   loading: boolean;
   setFormDataUser: Dispatch<
     SetStateAction<{
-      id?: string | undefined;
+      id?: string;
       username: string;
-      password?: string | undefined;
+      password: string;
     }>
   >;
 };
 
 const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
-  const [filter, setFilter] = useState("");
-
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFilter(e.target.value);
-  };
-
   if (loading) return <Loader />;
 
   if (!users) return <p>Algo fue mal</p>;
@@ -35,41 +30,38 @@ const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
     setFormDataUser({
       id: item.id,
       username: item.username,
-      password: undefined,
+      password: "",
     });
   };
 
-  return (
-    <div className="">
-      <div className="py-4">
-        <InputText
-          onChange={handleOnChange}
-          value={filter}
-          label="Filtro"
-          name="filter"
-        />
-      </div>
-      <table className="w-full border-2 border-slate-800 table-fixed">
-        <thead>
-          <tr>
-            <th className="border-2 border-slate-800">Nombre</th>
-            <th className="border-2 border-slate-800">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users
-            .filter((item) => item.username.includes(filter))
-            .map((item) => (
-              <ItemUser
-                user={item}
-                handleSetFormUser={handleSetFormUser}
-                key={item.id}
-              />
-            ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  const generateHead = (): Array<Head> => {
+    return [
+      {
+        id: 1,
+        name: "Nombre",
+      },
+      {
+        id: 2,
+        name: "Acciones",
+      },
+    ];
+  };
+
+  const generateBody = (): Array<BodyData> => {
+    return users.map((item) => ({
+      id: item.id as string,
+      filter: item.username,
+      subData: [
+        {
+          subItem: (
+            <ItemUser user={item} handleSetFormUser={handleSetFormUser} />
+          ),
+        },
+      ],
+    }));
+  };
+
+  return <Table addFilter={true} head={generateHead()} body={generateBody()} />;
 };
 
 export default ListOfUsers;

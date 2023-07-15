@@ -1,4 +1,7 @@
-import { useSignupMutation, useUpdateUserMutation } from "@/redux/services";
+import {
+  useSignupMutation,
+  useUpdateUserMutation,
+} from "@/redux/services/userApi";
 import { useRouter } from "next/navigation";
 import {
   ChangeEvent,
@@ -14,15 +17,15 @@ import InputText from "../../components/InputText";
 type Props = {
   setFormDataUser: Dispatch<
     SetStateAction<{
-      id?: string | undefined;
+      id?: string;
       username: string;
-      password?: string | undefined;
+      password: string;
     }>
   >;
   formDataUser: {
-    id?: string | undefined;
+    id?: string;
     username: string;
-    password?: string | undefined;
+    password: string;
   };
 };
 
@@ -92,7 +95,15 @@ const FormCreateUser = ({ setFormDataUser, formDataUser }: Props) => {
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formDataUser.id) {
-      updateUser({ id: formDataUser.id || "", user: formDataUser });
+      updateUser({
+        id: formDataUser.id || "",
+        user: {
+          id: formDataUser.id,
+          username: formDataUser.username,
+          password:
+            formDataUser.password === "" ? undefined : formDataUser.password,
+        },
+      });
     } else {
       signUp({ ...formDataUser });
     }
@@ -115,17 +126,14 @@ const FormCreateUser = ({ setFormDataUser, formDataUser }: Props) => {
           placeholder="Inserte un nombre de usuario"
           onChange={handleOnChange}
         />
-        {!formDataUser.id &&
-          (formDataUser.password || formDataUser.password === "") && (
-            <InputText
-              label="Contraseña"
-              name="password"
-              value={formDataUser.password}
-              placeholder="Inserte una contraseña"
-              onChange={handleOnChange}
-              type="password"
-            />
-          )}
+        <InputText
+          label="Contraseña"
+          name="password"
+          value={formDataUser.password}
+          placeholder="Inserte una contraseña"
+          onChange={handleOnChange}
+          type="password"
+        />
       </fieldset>
 
       <div className="flex gap-x-2 mt-5">
