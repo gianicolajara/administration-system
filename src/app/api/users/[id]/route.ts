@@ -1,10 +1,10 @@
 import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import User from "@/models/user";
+import { IUser } from "@/types/interfaces/user";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import validator from "validator";
-import { IUser } from "../../../../../types/interfaces/user";
 
 export const PUT = async (
   request: Request,

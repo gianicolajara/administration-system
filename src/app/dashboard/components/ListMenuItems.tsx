@@ -1,6 +1,6 @@
 "use client";
+import { MenuItemDashboard } from "@/types/types/dashboard";
 import { useState } from "react";
-import { MenuItemDashboard } from "../../../../types/types/dashboard";
 import MenuItem from "./MenuItem";
 
 type Props = {

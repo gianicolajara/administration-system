@@ -1,5 +1,5 @@
+import { IMoney, IMoneyModel } from "@/types/interfaces/money";
 import { Schema, model, models } from "mongoose";
-import { IMoney, IMoneyModel } from "../../types/interfaces/money";
 
 const moneySchema = new Schema<IMoney>(
   {
@@ -15,7 +15,6 @@ const moneySchema = new Schema<IMoney>(
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
         return ret;
       },
     },

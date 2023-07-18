@@ -2,6 +2,7 @@
 
 import { store } from "@/redux/store";
 import { Inter } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import { ReactNode, Suspense } from "react";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <Provider store={store}>
       <html lang="en">
         <body className={`${inter.className} w-screen h-screen bg-slate-950`}>
+          <NextTopLoader color="#9333EA" />
           <ToastContainer />
+          <div id="modal"></div>
           <NextAuthProvider>{children}</NextAuthProvider>
           <Suspense fallback={null}>
             <LoadingLayout />

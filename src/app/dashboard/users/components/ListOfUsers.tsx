@@ -3,8 +3,8 @@
 import { Dispatch, SetStateAction } from "react";
 
 import Table from "@/app/components/Table";
-import { IUser } from "../../../../../types/interfaces/user";
-import { BodyData, Head } from "../../../../../types/types/table";
+import { IUser } from "@/types/interfaces/user";
+import { BodyData, Head } from "@/types/types/table";
 import Loader from "../../components/Loader";
 import ItemUser from "./ItemUser";
 

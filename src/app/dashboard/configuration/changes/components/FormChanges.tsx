@@ -12,9 +12,9 @@ import {
   useUpdateChangeMutation,
 } from "@/redux/services/changesApi";
 import { useGetAllCurrenciesQuery } from "@/redux/services/currencyApi";
+import { IChanges } from "@/types/interfaces/changes";
+import { IMoney } from "@/types/interfaces/money";
 import { ChangeEvent, FormEvent, useEffect } from "react";
-import { IChanges } from "../../../../../../types/interfaces/changes";
-import { IMoney } from "../../../../../../types/interfaces/money";
 import { generateSelectOptions } from "../utils/createForm";
 
 type Props = {
@@ -95,7 +95,7 @@ const FormChanges = ({ formData, handleChange, handleReset }: Props) => {
               items={generateSelectOptions(data as Array<IMoney>)}
               isLoading={isLoadingGetAll}
               name="from"
-              value={formData.from}
+              value={formData.from as string}
               label="De"
               placeholder="Seleccione una moneda"
             />
@@ -104,7 +104,7 @@ const FormChanges = ({ formData, handleChange, handleReset }: Props) => {
               items={generateSelectOptions(data as Array<IMoney>)}
               isLoading={isLoadingGetAll}
               name="to"
-              value={formData.to}
+              value={formData.to as string}
               label="A"
               placeholder="Seleccione una moneda"
             />

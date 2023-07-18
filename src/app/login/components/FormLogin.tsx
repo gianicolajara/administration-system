@@ -95,7 +95,7 @@ const FormLogin = () => {
           onBlur={handleOnBlur}
           onKeyDown={handleKeyPressed}
           value={formDataLogin.username}
-          className="w-full p-4 bg-slate-700 rounded-full text-white text-lg"
+          className="w-full p-2 lg:p-4 bg-slate-700 rounded-full text-white text-lg"
         />
         <label htmlFor="password" className="text-slate-400">
           Password:
@@ -110,7 +110,7 @@ const FormLogin = () => {
           onKeyDown={handleKeyPressed}
           onChange={handleOnChange}
           value={formDataLogin.password}
-          className="w-full p-4 bg-slate-700 rounded-full text-white text-lg"
+          className="w-full p-2 lg:p-4 bg-slate-700 rounded-full text-white text-lg"
         />
       </div>
       <Button type="submit" loading={loading}>

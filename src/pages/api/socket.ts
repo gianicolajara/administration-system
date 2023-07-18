@@ -1,7 +1,7 @@
+import { NextApiResponseServerIO } from "@/types/types/next";
 import { Server as HttpServer } from "http";
 import { NextApiRequest } from "next";
 import { Server as IOServer } from "socket.io";
-import { NextApiResponseServerIO } from "../../../types/types/next";
 
 const handler = (req: NextApiRequest, res: NextApiResponseServerIO) => {
   if (!res.socket.server.io) {

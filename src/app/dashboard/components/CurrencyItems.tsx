@@ -1,5 +1,5 @@
+import { ResponseCurrencyConvert } from "@/types/types/currency";
 import { JSDOM } from "jsdom";
-import { ResponseCurrencyConvert } from "../../../../types/types/currency";
 
 type Props = {
   promiseVEF: Promise<any>;

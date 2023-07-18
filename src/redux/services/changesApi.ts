@@ -1,5 +1,5 @@
+import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IChanges, IChangesResponse } from "../../../types/interfaces/changes";
 
 export const changesApi = createApi({
   reducerPath: "changesAPi",

@@ -1,6 +1,6 @@
 import { useDesactivateUserMutation } from "@/redux/services/userApi";
+import { IUser } from "@/types/interfaces/user";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { IUser } from "../../../../../types/interfaces/user";
 import Loader from "../../components/Loader";
 
 type Props = {

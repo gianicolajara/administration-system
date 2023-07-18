@@ -1,6 +1,6 @@
 import Button from "@/app/dashboard/components/Button";
 import { useDeleteCurrencyMutation } from "@/redux/services/currencyApi";
-import { IMoney } from "../../../../../../types/interfaces/money";
+import { IMoney } from "@/types/interfaces/money";
 
 type Props = {
   currency: IMoney;

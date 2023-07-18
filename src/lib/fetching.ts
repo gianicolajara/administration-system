@@ -1,6 +1,6 @@
+import { IAxiosErrorResponse } from "@/types/interfaces/http";
+import { httpError } from "@/types/interfaces/httpError";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { IAxiosErrorResponse } from "../../types/interfaces/http";
-import { httpError } from "../../types/interfaces/httpError";
 
 interface IFetchingProps {
   url: string;

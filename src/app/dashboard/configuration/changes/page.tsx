@@ -17,16 +17,16 @@ const Changes = () => {
   return (
     <div className="w-full h-full">
       <Title>Cambios</Title>
-      <div className="grid grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
-        <TableChanges
-          changes={data}
-          loading={isLoading}
-          setFormData={setFormData}
-        />
+      <div className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
         <FormChanges
           formData={formData}
           handleChange={handleChange}
           handleReset={handleReset}
+        />
+        <TableChanges
+          changes={data}
+          loading={isLoading}
+          setFormData={setFormData}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
-import { IChanges } from "../../../../../../types/interfaces/changes";
-import { IMoney } from "../../../../../../types/interfaces/money";
-import { ItemSelect } from "../../../../../../types/types/select";
+import { IChanges } from "@/types/interfaces/changes";
+import { IMoney } from "@/types/interfaces/money";
+import { ItemSelect } from "@/types/types/select";
 
 export const generateSelectOptions = (
   items: Array<IMoney>

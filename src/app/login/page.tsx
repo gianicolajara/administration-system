@@ -20,7 +20,7 @@ const Login = () => {
     redirect("/dashboard");
   }
   return (
-    <section className="w-screen h-screen bg-slate-950 grid place-items-center">
+    <section className="w-screen h-screen bg-slate-950 grid place-items-center p-2">
       <FormLogin />
     </section>
   );

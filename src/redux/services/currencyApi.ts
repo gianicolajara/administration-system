@@ -1,5 +1,5 @@
+import { IMoney } from "@/types/interfaces/money";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IMoney } from "../../../types/interfaces/money";
 
 export const currencyApi = createApi({
   reducerPath: "currencyApi",

@@ -1,11 +1,7 @@
+import { IUser, IUserModel, IUserModelMethods } from "@/types/interfaces/user";
 import * as bcrypt from "bcrypt";
 import { Schema, model, models } from "mongoose";
 import validator from "validator";
-import {
-  IUser,
-  IUserModel,
-  IUserModelMethods,
-} from "../../types/interfaces/user";
 
 const UserSchema = new Schema<IUser, IUserModelMethods, IUserModelMethods>(
   {

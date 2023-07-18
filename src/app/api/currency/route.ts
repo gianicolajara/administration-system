@@ -1,8 +1,8 @@
 import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Money from "@/models/money";
+import { IMoney } from "@/types/interfaces/money";
 import { NextResponse } from "next/server";
-import { IMoney } from "../../../../types/interfaces/money";
 
 export const revalidate = 0;
 

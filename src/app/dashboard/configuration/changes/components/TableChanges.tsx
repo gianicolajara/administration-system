@@ -1,11 +1,8 @@
 import Table from "@/app/components/Table";
 import Loader from "@/app/dashboard/components/Loader";
+import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
+import { BodyData, Head } from "@/types/types/table";
 import { Dispatch, SetStateAction } from "react";
-import {
-  IChanges,
-  IChangesResponse,
-} from "../../../../../../types/interfaces/changes";
-import { BodyData, Head } from "../../../../../../types/types/table";
 import ItemChanges from "./ItemChanges";
 
 type Props = {

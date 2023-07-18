@@ -1,8 +1,8 @@
 import { onError } from "@/lib/handlers";
 import Money from "@/models/money";
+import { IMoney } from "@/types/interfaces/money";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
-import { IMoney } from "../../../../../types/interfaces/money";
 
 export const PUT = async (
   request: Request,

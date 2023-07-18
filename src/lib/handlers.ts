@@ -9,7 +9,7 @@ export const onError = (error: any) => {
       return NextResponse.json(
         {
           success: false,
-          message: "A user with this this unique key already exists!",
+          message: (error as MongoError).message,
         },
         {
           status: 400,

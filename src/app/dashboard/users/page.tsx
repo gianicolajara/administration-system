@@ -18,15 +18,15 @@ const Users = () => {
   });
 
   return (
-    <section className="grid grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
+    <section className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
+      <FormCreateUser
+        setFormDataUser={setFormDataUser}
+        formDataUser={formDataUser}
+      />
       <ListOfUsers
         users={data}
         loading={isLoading}
         setFormDataUser={setFormDataUser}
-      />
-      <FormCreateUser
-        setFormDataUser={setFormDataUser}
-        formDataUser={formDataUser}
       />
     </section>
   );

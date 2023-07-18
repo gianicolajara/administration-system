@@ -6,6 +6,7 @@ import {
   useCreateCurrencyMutation,
   useUpdateCurrencyMutation,
 } from "@/redux/services/currencyApi";
+import { IMoney } from "@/types/interfaces/money";
 import {
   ChangeEvent,
   Dispatch,
@@ -14,7 +15,6 @@ import {
   useEffect,
 } from "react";
 import { toast } from "react-toastify";
-import { IMoney } from "../../../../../../types/interfaces/money";
 
 type Props = {
   // eslint-disable-next-line no-unused-vars

@@ -1,7 +1,7 @@
 import { onError } from "@/lib/handlers";
 import Changes from "@/models/changes";
+import { IChanges } from "@/types/interfaces/changes";
 import { NextResponse } from "next/server";
-import { IChanges } from "../../../../types/interfaces/changes";
 
 export const POST = async (request: Request) => {
   try {

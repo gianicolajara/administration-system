@@ -3,7 +3,7 @@
 import Title from "@/app/components/Title";
 import useForm from "@/hooks/useForm";
 import { useGetAllCurrenciesQuery } from "@/redux/services/currencyApi";
-import { IMoney } from "../../../../../types/interfaces/money";
+import { IMoney } from "@/types/interfaces/money";
 import FormCurrency from "./components/FormCurrency";
 import TableCurrency from "./components/TableCurrency";
 
@@ -21,17 +21,17 @@ const Currency = () => {
   return (
     <div className="w-full h-full">
       <Title>Monedas</Title>
-      <div className="grid grid-cols-1 grid-rows-2 lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
-        <TableCurrency
-          currencies={data}
-          loading={isLoading}
-          setFormData={setFormData}
-        />
+      <div className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
         <FormCurrency
           formData={formData}
           handleChange={handleChange}
           setFormData={setFormData}
           handleReset={handleReset}
+        />
+        <TableCurrency
+          currencies={data}
+          loading={isLoading}
+          setFormData={setFormData}
         />
       </div>
     </div>

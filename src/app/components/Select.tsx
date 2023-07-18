@@ -1,5 +1,5 @@
+import { ItemSelect } from "@/types/types/select";
 import { ChangeEvent } from "react";
-import { ItemSelect } from "../../../types/types/select";
 import Loader from "../dashboard/components/Loader";
 
 type Props = {

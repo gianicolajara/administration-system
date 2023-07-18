@@ -1,10 +1,7 @@
 import Button from "@/app/dashboard/components/Button";
 import { useDeleteChangeMutation } from "@/redux/services/changesApi";
+import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
 import { Dispatch, SetStateAction } from "react";
-import {
-  IChanges,
-  IChangesResponse,
-} from "../../../../../../types/interfaces/changes";
 
 type Props = {
   changes: IChangesResponse;

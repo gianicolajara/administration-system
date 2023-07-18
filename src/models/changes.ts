@@ -1,15 +1,15 @@
+import { IChanges, IModelChanges } from "@/types/interfaces/changes";
 import mongoose, { Schema, model, models } from "mongoose";
-import { IChanges, IModelChanges } from "../../types/interfaces/changes";
 
 const changeSchema = new Schema<IChanges>(
   {
     from: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Money",
       required: true,
     },
     to: {
-      type: mongoose.SchemaTypes.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Money",
       required: true,
     },
@@ -25,7 +25,6 @@ const changeSchema = new Schema<IChanges>(
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
-        delete ret.password;
         return ret;
       },
     },

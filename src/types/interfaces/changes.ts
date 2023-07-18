@@ -1,10 +1,10 @@
-import { Model } from "mongoose";
+import { Model, Schema } from "mongoose";
 import { IMoney } from "./money";
 
 export interface IChanges {
   id?: string;
-  from: string;
-  to: string;
+  from: string | Schema.Types.ObjectId;
+  to: string | Schema.Types.ObjectId;
   amount: number | string;
 }
 

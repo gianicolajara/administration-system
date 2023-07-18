@@ -1,11 +1,11 @@
-import axios, { AxiosError } from "axios";
-import { useCallback, useEffect, useState } from "react";
 import {
   IAxiosErrorResponse,
   IUseFetch,
   IUseFetchReturn,
-} from "../../types/interfaces/http";
-import { httpError } from "../../types/interfaces/httpError";
+} from "@/types/interfaces/http";
+import { httpError } from "@/types/interfaces/httpError";
+import axios, { AxiosError } from "axios";
+import { useCallback, useEffect, useState } from "react";
 
 const useFetch = <T>({
   url = "",

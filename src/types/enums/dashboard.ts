@@ -13,9 +13,3 @@ export enum AssetsEnum {
   Ingreso = 1,
   Egreso = 2,
 }
-
-export enum TypeOfCurrencyEnum {
-  Pesos = 1,
-  Dolar = 2,
-  Bolivar = 3,
-}

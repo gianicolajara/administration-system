@@ -1,7 +1,7 @@
 import { onError } from "@/lib/handlers";
+import { ResponseCurrencyConvert } from "@/types/types/currency";
 import { JSDOM } from "jsdom";
 import { NextResponse } from "next/server";
-import { ResponseCurrencyConvert } from "../../../../types/types/currency";
 
 export const GET = async () => {
   try {

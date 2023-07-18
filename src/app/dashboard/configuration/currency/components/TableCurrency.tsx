@@ -1,8 +1,8 @@
 import Table from "@/app/components/Table";
 import Loader from "@/app/dashboard/components/Loader";
+import { IMoney } from "@/types/interfaces/money";
+import { BodyData, Head } from "@/types/types/table";
 import { Dispatch, SetStateAction } from "react";
-import { IMoney } from "../../../../../../types/interfaces/money";
-import { BodyData, Head } from "../../../../../../types/types/table";
 import ItemCurrency from "./ItemCurrency";
 
 type Props = {
