@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const currencyApi = createApi({
   reducerPath: "currencyApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
   tagTypes: ["Currency"],
   endpoints: (build) => ({
     getAllCurrencies: build.query({

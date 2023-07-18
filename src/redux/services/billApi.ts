@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 
 export const billApi = createApi({
   reducerPath: "billApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/api/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
   tagTypes: ["Bill"],
   endpoints: (builder) => ({
     getAllBilles: builder.query<Array<IBillResponse>, void>({
