@@ -13,8 +13,8 @@ const ItemCurrency = ({ currency, handleSetFormCurrency }: Props) => {
 
   return (
     <>
-      <td className="border-2 border-slate-800 p-4">{currency.name}</td>
-      <td className="border-2 border-slate-800 px-2">
+      <td className="border-2 border-neutral-700 p-4">{currency.name}</td>
+      <td className="border-2 border-neutral-700 px-2">
         <div className="flex gap-x-1">
           <Button onClick={() => handleSetFormCurrency(currency)}>
             Editar

@@ -34,12 +34,12 @@ const Modal = ({ children, open, setOpen, handleClose }: Props) => {
           onClick={() => setOpen(false)}
         >
           <div
-            className="max-w-[600px] max-h-[600px] bg-slate-600 w-full h-min p-4 rounded-lg drop-shadow-lg relative"
+            className="max-w-[600px] max-h-[600px] bg-neutral-950 w-full h-min p-4 rounded-lg drop-shadow-lg relative border-2 border-neutral-700"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-0 top-0 p-4">
               <Button onClick={handleClose}>
-                <AiOutlineClose size={25} className="text-white" />
+                <AiOutlineClose size={15} className="text-white" />
               </Button>
             </div>
             {children}

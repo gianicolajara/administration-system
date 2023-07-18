@@ -106,7 +106,7 @@ const FormCurrency = ({
             placeholder="Ingrese un nombre de moneda"
           />
         </FieldSet>
-        <div className="mt-4 flex gap-x-2">
+        <div className="mt-4 flex gap-x-2 w-full justify-center">
           <Button type="submit" loading={isLoading || isLoadingUpdate}>
             Guardar
           </Button>

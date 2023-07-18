@@ -20,14 +20,16 @@ const InputText = ({
 }: Props) => {
   return (
     <div className="flex flex-col w-full">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="text-white">
+        {label}
+      </label>
       <input
         type={type}
         name={name}
         id={name}
         value={value}
         onChange={onChange}
-        className="w-full h-[50px] bg-slate-800 p-2 text-white"
+        className="w-full bg-neutral-900 rounded-lg p-2 text-white focus:ring-2 focus:ring-slate-200/50 focus:outline-none transition-all border-2 border-neutral-600 focus:border-neutral-200"
         step={type === "number" ? "0.01" : ""}
         placeholder={placeholder}
       />

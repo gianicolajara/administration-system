@@ -76,9 +76,9 @@ const FormLogin = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className={`w-full max-w-sm h-full max-h-96 bg-slate-900 rounded-lg drop-shadow-xl p-8 flex flex-col justify-between  transition-all ${
-        activeForm ? "shadow-purple-950/80" : ""
-      } ${keyPressed ? "shadow-2xl shadow-purple-800" : "shadow-lg"}`}
+      className={`w-full max-w-sm h-full max-h-96 bg-neutral-900 rounded-lg drop-shadow-xl p-8 flex flex-col justify-between  transition-all ${
+        activeForm ? "shadow-primary/80" : ""
+      } ${keyPressed ? "shadow-2xl shadow-primary-800" : "shadow-lg"}`}
     >
       <h1 className="text-white font-bold text-3xl text-left">Login</h1>
       <div className="flex flex-col gap-2">
@@ -95,7 +95,7 @@ const FormLogin = () => {
           onBlur={handleOnBlur}
           onKeyDown={handleKeyPressed}
           value={formDataLogin.username}
-          className="w-full p-2 lg:p-4 bg-slate-700 rounded-full text-white text-lg"
+          className="w-full p-2 lg:p-4 bg-neutral-800 rounded-full text-white text-lg"
         />
         <label htmlFor="password" className="text-slate-400">
           Password:
@@ -110,7 +110,7 @@ const FormLogin = () => {
           onKeyDown={handleKeyPressed}
           onChange={handleOnChange}
           value={formDataLogin.password}
-          className="w-full p-2 lg:p-4 bg-slate-700 rounded-full text-white text-lg"
+          className="w-full p-2 lg:p-4 bg-neutral-800 rounded-full text-white text-lg"
         />
       </div>
       <Button type="submit" loading={loading}>

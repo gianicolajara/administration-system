@@ -1,3 +1,5 @@
+import FieldSet from "@/app/components/FieldSet";
+import Form from "@/app/components/Form";
 import {
   useSignupMutation,
   useUpdateUserMutation,
@@ -111,42 +113,38 @@ const FormCreateUser = ({ setFormDataUser, formDataUser }: Props) => {
   };
 
   return (
-    <form
-      className="h-min border-2 border-slate-800 p-5 rounded-lg"
-      onSubmit={handleOnSubmit}
-    >
-      <fieldset className="flex gap-x-4 border-2 border-slate-800 p-5">
-        <legend className="bg-white py-1 px-2 rounded-lg text-slate-950 font-bold">
-          {formDataUser.id ? "Editar Usuario" : "Crear usuario"}
-        </legend>
-        <InputText
-          label="Nombre de Usuario"
-          name="username"
-          value={formDataUser.username}
-          placeholder="Inserte un nombre de usuario"
-          onChange={handleOnChange}
-        />
-        <InputText
-          label="Contraseña"
-          name="password"
-          value={formDataUser.password}
-          placeholder="Inserte una contraseña"
-          onChange={handleOnChange}
-          type="password"
-        />
-      </fieldset>
+    <div>
+      <Form onSubmit={handleOnSubmit}>
+        <FieldSet title={formDataUser.id ? "Editar Usuario" : "Crear usuario"}>
+          <InputText
+            label="Nombre de Usuario"
+            name="username"
+            value={formDataUser.username}
+            placeholder="Inserte un nombre de usuario"
+            onChange={handleOnChange}
+          />
+          <InputText
+            label="Contraseña"
+            name="password"
+            value={formDataUser.password}
+            placeholder="Inserte una contraseña"
+            onChange={handleOnChange}
+            type="password"
+          />
+        </FieldSet>
 
-      <div className="flex gap-x-2 mt-5">
-        <Button loading={isLoading || isLoadingUpdate} type="submit">
-          Guardar
-        </Button>
-        {formDataUser.id && (
-          <Button type="reset" onClick={handleReset}>
-            Cancelar
+        <div className="flex gap-x-2 mt-5 w-full justify-center">
+          <Button loading={isLoading || isLoadingUpdate} type="submit">
+            Guardar
           </Button>
-        )}
-      </div>
-    </form>
+          {formDataUser.id && (
+            <Button type="reset" onClick={handleReset}>
+              Cancelar
+            </Button>
+          )}
+        </div>
+      </Form>
+    </div>
   );
 };
 

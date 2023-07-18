@@ -10,7 +10,7 @@ const Login = () => {
 
   if (status === "loading") {
     return (
-      <div className="w-screen h-screen bg-slate-950">
+      <div className="w-screen h-screen bg-neutral-950">
         <Loader />
       </div>
     );
@@ -20,7 +20,7 @@ const Login = () => {
     redirect("/dashboard");
   }
   return (
-    <section className="w-screen h-screen bg-slate-950 grid place-items-center p-2">
+    <section className="w-screen h-screen bg-neutral-950 grid place-items-center p-2">
       <FormLogin />
     </section>
   );

@@ -17,8 +17,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <Provider store={store}>
       <html lang="en">
-        <body className={`${inter.className} w-screen h-screen bg-slate-950`}>
-          <NextTopLoader color="#9333EA" />
+        <body className={`${inter.className} w-screen h-screen bg-neutral-950`}>
+          <NextTopLoader color="#ff8400" />
           <ToastContainer />
           <div id="modal"></div>
           <NextAuthProvider>{children}</NextAuthProvider>

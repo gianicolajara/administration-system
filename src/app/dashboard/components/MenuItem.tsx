@@ -27,17 +27,17 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
 
   return (
     <li
-      className={`text-white w-full h-full border-b-2 border-slate-900 transition-all cursor-pointer flex flex-col select-none `}
+      className={`text-white w-full h-full border-b-2 border-neutral-900 transition-all cursor-pointer flex flex-col select-none `}
       onClick={() => handleActiveItem(item.id)}
     >
       {item.url ? (
         <Link href={item.url}>
           <div
             onClick={() => setOpenItemMenu(!openItemMenu)}
-            className={`w-full h-full flex justify-center lg:justify-between items-center hover:bg-slate-800 p-3  ${
+            className={`w-full h-full flex justify-center lg:justify-between items-center hover:bg-neutral-700 p-3 transition-all ${
               actualPrincipalPage ===
               (item.originalTitle as string).toLowerCase()
-                ? "bg-slate-800"
+                ? "bg-neutral-800"
                 : ""
             }`}
           >
@@ -55,9 +55,9 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
       ) : (
         <div
           onClick={() => setOpenItemMenu(!openItemMenu)}
-          className={`w-full h-full flex justify-between items-center hover:bg-slate-800 p-3 ${
+          className={`w-full h-full flex justify-between items-center hover:bg-neutral-700 p-3 ${
             actualPrincipalPage === (item.originalTitle as string).toLowerCase()
-              ? "bg-slate-800"
+              ? "bg-neutral-800"
               : ""
           }`}
         >
@@ -81,10 +81,10 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
           {item.subitems.map((subItems) => (
             <Link key={subItems.id} href={subItems.url as string}>
               <li
-                className={`text-white py-1 px-3 w-full border-t-2 border-slate-900 hover:bg-slate-900 transition-all cursor-pointer flex justify-center ${
+                className={`text-white py-1 px-3 w-full border-t-2 border-neutral-900  transition-all cursor-pointer flex justify-center ${
                   actualPage ===
                   (subItems.url as string).split("/")[3].replace("/", "")
-                    ? "bg-purple-950/50"
+                    ? "bg-primary/50"
                     : ""
                 } `}
               >

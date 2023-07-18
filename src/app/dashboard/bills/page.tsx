@@ -1,6 +1,6 @@
 "use client";
 
-import Title from "@/app/components/Title";
+import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
 import { useGetAllBillesQuery } from "@/redux/services/billApi";
@@ -29,7 +29,9 @@ const Create = () => {
         handleClose={handleClose}
       />
       <section className="w-full h-full">
-        <Title>Crear Factura</Title>
+        <div className="mb-4">
+          <SubTitle>Facturas</SubTitle>
+        </div>
         <section className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
           <FormCreateBill
             formData={formData}

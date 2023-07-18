@@ -89,7 +89,7 @@ const FormChanges = ({ formData, handleChange, handleReset }: Props) => {
     <div>
       <Form onSubmit={handleSubmit}>
         <FieldSet title={formData.id ? "Modificar Cambio" : "Crear cambio"}>
-          <div className="flex flex-col gap-y-4 w-full">
+          <div className="flex flex-col gap-y-2 w-full">
             <Select
               onChange={handleChange}
               items={generateSelectOptions(data as Array<IMoney>)}
@@ -118,7 +118,7 @@ const FormChanges = ({ formData, handleChange, handleReset }: Props) => {
             />
           </div>
         </FieldSet>
-        <div className="mt-4 flex gap-x-2">
+        <div className="mt-4 flex gap-x-2 w-full justify-center">
           <Button type="submit" loading={isLoading || isLoadingUpdate}>
             Guardar
           </Button>

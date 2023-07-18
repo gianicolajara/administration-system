@@ -12,14 +12,14 @@ type Props = {
 
 const InputRadio = ({ label, name, value, checked, onChange }: Props) => {
   return (
-    <label>
+    <label className="text-white">
       <input
         type="radio"
         name={name}
         value={value}
         checked={checked}
         onChange={onChange}
-        className="appearance-none w-5 h-5 rounded-full border-4 border-purple-950 transition-all relative checked:border-8 checked:border-purple-600 select-none top-1 right-1"
+        className="appearance-none w-5 h-5 rounded-full border-4 border-neutral-400 transition-all relative checked:border-8 checked:border-neutral-400 select-none top-1 right-1"
       />
       {label}
     </label>

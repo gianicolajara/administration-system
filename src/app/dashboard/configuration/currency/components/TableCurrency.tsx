@@ -55,7 +55,9 @@ const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
     }));
   };
 
-  return <Table addFilter={true} body={generateBody()} head={generateHead()} />;
+  return (
+    <Table addFilter={false} body={generateBody()} head={generateHead()} />
+  );
 };
 
 export default TableCurrency;

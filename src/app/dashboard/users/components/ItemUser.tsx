@@ -1,7 +1,8 @@
 import { useDesactivateUserMutation } from "@/redux/services/userApi";
 import { IUser } from "@/types/interfaces/user";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import Loader from "../../components/Loader";
+import Button from "../../components/Button";
+import ButtonIcon from "../../components/ButtonIcon";
 
 type Props = {
   user: IUser;
@@ -14,27 +15,18 @@ const ItemUser = ({ user, handleSetFormUser }: Props) => {
 
   return (
     <>
-      <td className="border-2 border-slate-800 p-4">{user.username}</td>
-      <td className="border-2 border-slate-800 px-2">
-        <button
-          className="p-2 bg-slate-800 rounded-full hover:bg-slate-700 mr-2"
-          disabled={isLoading}
-          onClick={() => desactivate(user.id)}
-        >
-          {isLoading ? (
-            <Loader />
-          ) : user.active ? (
-            <AiFillEye size={20} />
-          ) : (
-            <AiFillEyeInvisible size={20} />
-          )}
-        </button>
-        <button
-          className="p-2 bg-slate-800 rounded-full hover:bg-slate-700"
-          onClick={() => handleSetFormUser(user)}
-        >
-          Editar
-        </button>
+      <td className="border-2 border-neutral-700 p-4">{user.username}</td>
+      <td className="border-2 border-neutral-700 px-2">
+        <div className="flex items-center gap-x-2">
+          <ButtonIcon loading={isLoading} onClick={() => desactivate(user.id)}>
+            {user.active ? (
+              <AiFillEye size={20} />
+            ) : (
+              <AiFillEyeInvisible size={20} />
+            )}
+          </ButtonIcon>
+          <Button onClick={() => handleSetFormUser(user)}>Editar</Button>
+        </div>
       </td>
     </>
   );

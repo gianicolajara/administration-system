@@ -34,18 +34,18 @@ const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
 
   return (
     <>
-      <td className="border-2 border-slate-800 p-4">{bill.billNumber}</td>
-      <td className="border-2 border-slate-800 p-4">
+      <td className="border-2 border-neutral-700 p-4">{bill.billNumber}</td>
+      <td className="border-2 border-neutral-700 p-4">
         {BillsEnum[bill.billType]}
       </td>
-      <td className="border-2 border-slate-800 p-4">
+      <td className="border-2 border-neutral-700 p-4">
         {AssetsEnum[bill.assets]}
       </td>
-      <td className="border-2 border-slate-800 p-4">
+      <td className="border-2 border-neutral-700 p-4">
         {bill.typeOfCurrency.name}
       </td>
-      <td className="border-2 border-slate-800 p-4">{bill.amountMoney}</td>
-      <td className="border-2 border-slate-800 p-4">
+      <td className="border-2 border-neutral-700 p-4">{bill.amountMoney}</td>
+      <td className="border-2 border-neutral-700 p-4">
         <div className="flex gap-x-2">
           <Button onClick={() => handleOpenModal(bill)}>Ver</Button>
           <Button onClick={() => handleSetFormData(bill)}>Editar</Button>

@@ -13,7 +13,7 @@ const Table = ({ body, head, addFilter }: Props) => {
     : () => {};
 
   return (
-    <div className="h-min w-full border-2 border-slate-800 rounded-lg p-4">
+    <div className="h-min w-full border-2 border-neutral-700 bg-neutral-900 rounded-lg p-4">
       {addFilter && (
         <div className="py-4">
           <InputText
@@ -25,11 +25,11 @@ const Table = ({ body, head, addFilter }: Props) => {
         </div>
       )}
       <div className="overflow-x-auto w-full">
-        <table className="border-2 border-slate-800 table-auto border-collapse w-full">
-          <thead>
+        <table className="table-auto w-full text-left p-4 border-neutral-800 border-collapse text-white">
+          <thead className="p-4">
             <tr>
               {head?.map((item) => (
-                <th className="border-2 border-slate-800" key={item.id}>
+                <th className="border-2 border-neutral-700 px-4" key={item.id}>
                   {item.name}
                 </th>
               ))}

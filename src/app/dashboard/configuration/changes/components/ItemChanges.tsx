@@ -22,10 +22,10 @@ const ItemChanges = ({ changes, setFormData }: Props) => {
 
   return (
     <>
-      <td className="border-2 border-slate-800 p-2">{changes.from.name}</td>
-      <td className="border-2 border-slate-800 p-2">{changes.to.name}</td>
-      <td className="border-2 border-slate-800 p-2">{changes.amount}</td>
-      <td className="border-2 border-slate-800 p-2">
+      <td className="border-2 border-neutral-700 p-2">{changes.from.name}</td>
+      <td className="border-2 border-neutral-700 p-2">{changes.to.name}</td>
+      <td className="border-2 border-neutral-700 p-2">{changes.amount}</td>
+      <td className="border-2 border-neutral-700 p-2">
         <div className="flex gap-x-2">
           <Button onClick={() => handleSetFormData(changes)}>Editar</Button>
           <Button

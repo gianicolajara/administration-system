@@ -3,6 +3,7 @@
 import FieldSet from "@/app/components/FieldSet";
 import Form from "@/app/components/Form";
 import Select from "@/app/components/Select";
+import TextArea from "@/app/components/TextArea";
 import {
   httpErrorMessageHandle,
   httpSuccessMessageHandle,
@@ -24,6 +25,7 @@ import {
   useEffect,
 } from "react";
 import Button from "../../components/Button";
+import InputRadio from "../../components/InputRadio";
 import InputText from "../../components/InputText";
 import {
   createSelectItems,
@@ -109,67 +111,57 @@ const FormCreateBill = ({
   }, [errorUpdate, isErrorUpdate, isSuccessUpdate]);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FieldSet title="Tipo de Factura">
-        <ListBillType
-          FormData={formData}
-          onChange={handleChange}
-          typesOfBills={typesOfBills}
-        />
-      </FieldSet>
-      <FieldSet title="Activo Financiero">
-        <div className="flex flex-col gap-y-2 w-full">
-          <div className="flex gap-x-4 w-full">
-            <label>
-              <input
-                type="radio"
-                name="assets"
-                value={AssetsEnum.Ingreso}
-                onChange={handleChange}
+    <div>
+      <Form onSubmit={handleSubmit}>
+        <FieldSet title="Tipo de Factura" className="mt-0">
+          <ListBillType
+            FormData={formData}
+            onChange={handleChange}
+            typesOfBills={typesOfBills}
+          />
+        </FieldSet>
+        <FieldSet title="Activo Financiero">
+          <div className="flex flex-col gap-y-2 w-full">
+            <div className="flex gap-x-4 w-full">
+              <InputRadio
                 checked={
                   formData.assets.toString() === AssetsEnum.Ingreso.toString()
                 }
-                className="appearance-none w-5 h-5 rounded-full border-4 border-purple-950 transition-all relative checked:border-8 checked:border-purple-600 select-none top-1 right-1"
-              />
-              Ingreso
-            </label>
-            <label>
-              <input
-                type="radio"
+                label="Ingreso"
                 name="assets"
-                value={AssetsEnum.Egreso}
                 onChange={handleChange}
+                value={AssetsEnum.Ingreso}
+              />
+              <InputRadio
                 checked={
                   formData.assets.toString() === AssetsEnum.Egreso.toString()
                 }
-                className="appearance-none w-5 h-5 rounded-full border-4 border-purple-950 transition-all relative checked:border-8 checked:border-purple-600 select-none top-1 right-1"
+                label="Egreso"
+                name="assets"
+                onChange={handleChange}
+                value={AssetsEnum.Egreso}
               />
-              Egreso
-            </label>
+            </div>
+            <Select
+              items={createSelectItems(data as Array<IMoney>)}
+              isLoading={isLoadingCurrencies}
+              label="Tipo de moneda"
+              onChange={handleChange}
+              name="typeOfCurrency"
+              placeholder="Seleccione un tipo de moneda"
+              value={formData.typeOfCurrency as string}
+            />
           </div>
-          <Select
-            items={createSelectItems(data as Array<IMoney>)}
-            isLoading={isLoadingCurrencies}
-            label="Tipo de moneda"
-            onChange={handleChange}
-            name="typeOfCurrency"
-            placeholder="Seleccione un tipo de moneda"
-            value={formData.typeOfCurrency as string}
-          />
-        </div>
-      </FieldSet>
+        </FieldSet>
 
-      <FieldSet title="Datos">
-        <div className="flex flex-col w-full">
-          <div className="flex w-full gap-x-5">
+        <FieldSet title="Datos">
+          <div className="flex flex-col w-full">
             <InputText
               label="Numero de Factura"
               name="billNumber"
               onChange={handleChange}
               value={formData.billNumber}
             />
-          </div>
-          <div className="flex w-full gap-x-5 ">
             <InputText
               label="Cantidad de dinero"
               name="amountMoney"
@@ -177,28 +169,23 @@ const FormCreateBill = ({
               value={formData.amountMoney}
               type="number"
             />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="report">Reporte</label>
-            <textarea
+            <TextArea
+              label="Reporte"
               name="report"
-              cols={30}
-              rows={10}
               onChange={handleChange}
               value={formData.report}
-              className="resize-none bg-slate-800 rounded p-4 w-full"
               placeholder="Ingrese una descripción o titulo de su factura"
             />
+            <div className="mt-2 w-full flex justify-center gap-x-2">
+              <Button type="submit" loading={isLoading || isLoadingUpdate}>
+                Guardar
+              </Button>
+              {formData.id && <Button onClick={handleReset}>Cancelar</Button>}
+            </div>
           </div>
-          <div className="mt-2 w-full flex justify-center gap-x-2">
-            <Button type="submit" loading={isLoading || isLoadingUpdate}>
-              Guardar
-            </Button>
-            {formData.id && <Button onClick={handleReset}>Cancelar</Button>}
-          </div>
-        </div>
-      </FieldSet>
-    </Form>
+        </FieldSet>
+      </Form>
+    </div>
   );
 };
 

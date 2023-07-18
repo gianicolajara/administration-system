@@ -1,6 +1,6 @@
 "use client";
 
-import Title from "@/app/components/Title";
+import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import { useGetAllChangesQuery } from "@/redux/services/changesApi";
 import FormChanges from "./components/FormChanges";
@@ -16,7 +16,9 @@ const Changes = () => {
 
   return (
     <div className="w-full h-full">
-      <Title>Cambios</Title>
+      <div className="mb-4">
+        <SubTitle>Cambios</SubTitle>
+      </div>
       <div className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
         <FormChanges
           formData={formData}

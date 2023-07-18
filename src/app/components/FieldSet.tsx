@@ -3,12 +3,15 @@ import { ReactNode } from "react";
 type Props = {
   title: string;
   children: ReactNode;
+  className?: string;
 };
 
-const FieldSet = ({ children, title }: Props) => {
+const FieldSet = ({ children, title, className }: Props) => {
   return (
-    <fieldset className="flex gap-x-4 border-2 border-slate-800 p-5 mt-5 w-full">
-      <legend className="bg-white py-1 px-2 rounded-lg text-slate-950 font-bold">
+    <fieldset
+      className={`flex gap-x-4 border-2 border-neutral-700 p-4 w-full rounded-lg mt-2 ${className}`}
+    >
+      <legend className="bg-neutral-800 border-2 border-neutral-700 p-1 rounded-lg text-white text-sm">
         {title}
       </legend>
       {children}

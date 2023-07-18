@@ -9,7 +9,7 @@ type Props = {
 const Form = ({ onSubmit, children }: Props) => {
   return (
     <form
-      className="border-2 border-slate-800 p-5 rounded-lg max-h-min"
+      className="border-2 border-neutral-700 bg-neutral-900 p-2 rounded-lg max-h-min"
       onSubmit={onSubmit}
     >
       {children}
