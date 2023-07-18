@@ -1,3 +1,4 @@
+import Alert from "@/app/components/Alert";
 import Table from "@/app/components/Table";
 import Loader from "@/app/dashboard/components/Loader";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
@@ -22,8 +23,8 @@ const TableBilles = ({
 }: Props) => {
   if (loading) return <Loader />;
 
-  if (!billes) return <p>Algo fue mal</p>;
-  if (billes?.length === 0) return <p>Sin Data</p>;
+  if (!billes) return <Alert>Algo Fue mal</Alert>;
+  if (billes?.length === 0) return <Alert type="danger">Sin Data</Alert>;
 
   const generateHead = (): Array<Head> => {
     return [

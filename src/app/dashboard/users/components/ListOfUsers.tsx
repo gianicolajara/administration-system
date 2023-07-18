@@ -2,6 +2,7 @@
 
 import { Dispatch, SetStateAction } from "react";
 
+import P from "@/app/components/P";
 import Table from "@/app/components/Table";
 import { IUser } from "@/types/interfaces/user";
 import { BodyData, Head } from "@/types/types/table";
@@ -23,8 +24,8 @@ type Props = {
 const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
   if (loading) return <Loader />;
 
-  if (!users) return <p>Algo fue mal</p>;
-  if (users?.length === 0) return <p>Sin Data</p>;
+  if (!users) return <P>Algo fue mal</P>;
+  if (users?.length === 0) return <P>Sin Data</P>;
 
   const handleSetFormUser = (item: IUser) => {
     setFormDataUser({

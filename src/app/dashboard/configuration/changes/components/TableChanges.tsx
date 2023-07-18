@@ -1,3 +1,4 @@
+import P from "@/app/components/P";
 import Table from "@/app/components/Table";
 import Loader from "@/app/dashboard/components/Loader";
 import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
@@ -14,9 +15,9 @@ type Props = {
 const TableChanges = ({ loading, changes, setFormData }: Props) => {
   if (loading) return <Loader />;
 
-  if (changes?.length === 0) return <p>Sin Data</p>;
+  if (changes?.length === 0) return <P>Sin Data</P>;
 
-  if (!changes) return <p>Algo fue mal</p>;
+  if (!changes) return <P>Algo fue mal</P>;
 
   const generateHead = (): Array<Head> => {
     return [

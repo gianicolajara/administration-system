@@ -1,3 +1,4 @@
+import P from "@/app/components/P";
 import Table from "@/app/components/Table";
 import Loader from "@/app/dashboard/components/Loader";
 import { IMoney } from "@/types/interfaces/money";
@@ -14,9 +15,9 @@ type Props = {
 const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
   if (loading) return <Loader />;
 
-  if (currencies?.length === 0) return <p>Sin Data</p>;
+  if (currencies?.length === 0) return <P>Sin Data</P>;
 
-  if (!currencies) return <p>Algo fue mal</p>;
+  if (!currencies) return <P>Algo fue mal</P>;
 
   const handleSetFormCurrency = (currency: IMoney) => {
     setFormData({
