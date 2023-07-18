@@ -1,9 +1,10 @@
 import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { urlApi } from "./config";
 
 export const changesApi = createApi({
   reducerPath: "changesAPi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
+  baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
   tagTypes: ["Changes"],
   endpoints: (builder) => ({
     getAllChanges: builder.query({

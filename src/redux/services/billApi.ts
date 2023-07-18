@@ -1,9 +1,10 @@
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { urlApi } from "./config";
 
 export const billApi = createApi({
   reducerPath: "billApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
+  baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
   tagTypes: ["Bill"],
   endpoints: (builder) => ({
     getAllBilles: builder.query<Array<IBillResponse>, void>({

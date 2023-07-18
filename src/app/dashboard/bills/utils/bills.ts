@@ -42,6 +42,8 @@ export const initialStateForm: IBill = {
 };
 
 export const createSelectItems = (data: Array<IMoney>): Array<ItemSelect> => {
+  if (!data) return [];
+
   return data?.map((item) => ({
     id: item.id as string,
     label: item.name,

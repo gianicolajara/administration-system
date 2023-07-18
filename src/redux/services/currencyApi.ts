@@ -1,9 +1,12 @@
 import { IMoney } from "@/types/interfaces/money";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { urlApi } from "./config";
+
+
 
 export const currencyApi = createApi({
   reducerPath: "currencyApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
+  baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
   tagTypes: ["Currency"],
   endpoints: (build) => ({
     getAllCurrencies: build.query({

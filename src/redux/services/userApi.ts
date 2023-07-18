@@ -1,9 +1,12 @@
 import { IUser } from "@/types/interfaces/user";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { urlApi } from "./config";
 
 export const usersApi = createApi({
   reducerPath: "usersApi",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.API_ROUTE }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: urlApi,
+  }),
   tagTypes: ["Users"],
   endpoints: (builder) => ({
     signup: builder.mutation({
