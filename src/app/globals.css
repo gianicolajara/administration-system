@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-daterange-picker__wrapper {
+  background: #0c0c0c;
+  color: white;
+  border-radius: 5px;
+  height: 40px;
+}
+
+.react-calendar {
+  background: #0c0c0c !important;
+  color: white;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background: #000000 !important;
+}
+
+.react-calendar__tile--active {
+  background-color: #292929 !important;
+}
+
+.react-calendar__tile:hover {
+  background-color: #000000 !important;
+}
+
+.react-calendar__tile--now {
+  background-color: #ff8400 !important;
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #ff8400 !important;
+}
+
+.react-daterange-picker__calendar-button__icon {
+  color: red !important;
+}

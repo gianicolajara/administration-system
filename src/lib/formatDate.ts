@@ -4,3 +4,17 @@ export const formatDateYYYYmmdd = (date: Date) => {
   const year = Intl.DateTimeFormat("en", { year: "numeric" }).format(date);
   return `${year}-${month}-${day}`;
 };
+
+export const stringDateToYearMonthDayNumbers = (dateString: string) => {
+  const date = new Date(dateString);
+
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+
+  return {
+    year,
+    month,
+    day,
+  };
+};

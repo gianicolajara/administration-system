@@ -3,9 +3,22 @@ import Bill from "@/models/bill";
 import { IBill } from "@/types/interfaces/bill";
 import { NextResponse } from "next/server";
 
-export const GET = async () => {
+export const GET = async (request: Request) => {
   try {
-    const billes = await Bill.find({})
+    const { searchParams } = new URL(request.url);
+    const startDate = searchParams.get("startDate");
+    const endDate = searchParams.get("endDate");
+
+    const billes = await Bill.find(
+      startDate && endDate
+        ? {
+            createdAt: {
+              $gte: new Date(startDate as string),
+              $lte: new Date(endDate as string),
+            },
+          }
+        : {}
+    )
       .populate("typeOfCurrency")
       .populate("user");
 
@@ -18,6 +31,7 @@ export const GET = async () => {
       }
     );
   } catch (error) {
+    console.error(error);
     return onError(error);
   }
 };

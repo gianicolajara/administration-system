@@ -8,7 +8,7 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { AiOutlineClose } from "react-icons/ai";
-import Button from "../dashboard/components/Button";
+import ButtonIcon from "../dashboard/components/ButtonIcon";
 
 type Props = {
   open: boolean;
@@ -38,9 +38,9 @@ const Modal = ({ children, open, setOpen, handleClose }: Props) => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="absolute right-0 top-0 p-4">
-              <Button onClick={handleClose}>
+              <ButtonIcon onClick={handleClose}>
                 <AiOutlineClose size={15} className="text-white" />
-              </Button>
+              </ButtonIcon>
             </div>
             {children}
           </div>

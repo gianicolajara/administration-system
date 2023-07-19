@@ -14,9 +14,3 @@ export type BodyData = {
   filter?: string;
   subData: Array<SubItemData>;
 };
-
-export type Props = {
-  body: Array<BodyData>;
-  head: Array<Head>;
-  addFilter: boolean;
-};

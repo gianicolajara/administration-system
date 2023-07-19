@@ -5,13 +5,24 @@ import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
 import { useGetAllBillesQuery } from "@/redux/services/billApi";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
+import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
+import { useEffect, useState } from "react";
 import FormCreateBill from "./Components/FormCreateBill";
 import ModalBill from "./Components/ModalBill";
 import TableBilles from "./Components/TableBilles";
 import { initialStateForm } from "./utils/bills";
 
 const Create = () => {
-  const { isLoading, data } = useGetAllBillesQuery();
+  const [multiPickerValue, setMultiPickerValue] = useState<Value>([null, null]);
+
+  const { isLoading, data, refetch } = useGetAllBillesQuery({
+    startDate: multiPickerValue
+      ? (multiPickerValue as Array<Date>)[0]?.toString()
+      : undefined,
+    endDate: multiPickerValue
+      ? (multiPickerValue as Array<Date>)[1]?.toString()
+      : undefined,
+  });
 
   const { formData, handleChange, setFormData, handleReset } = useForm<IBill>({
     initialState: initialStateForm,
@@ -19,6 +30,12 @@ const Create = () => {
 
   const { handleClose, handleOpen, open, saveData, setSaveData, setOpen } =
     useModal<IBillResponse>();
+
+  useEffect(() => {
+    if (multiPickerValue !== null) {
+      refetch();
+    }
+  }, [multiPickerValue, refetch]);
 
   return (
     <>
@@ -45,6 +62,8 @@ const Create = () => {
             setFormData={setFormData}
             setModalData={setSaveData}
             handleOpen={handleOpen}
+            valueDatePicker={multiPickerValue}
+            onChangeDatePicker={setMultiPickerValue}
           />
         </section>
       </section>

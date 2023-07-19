@@ -21,7 +21,7 @@ const TextArea = ({ label, name, onChange, value, placeholder }: Props) => {
         rows={10}
         onChange={onChange}
         value={value}
-        className="w-full bg-neutral-900 rounded-lg p-2 text-white focus:ring-2 focus:ring-slate-200/50 focus:outline-none transition-all resize-none border-2 border-neutral-600 focus:border-neutral-200"
+        className="w-full bg-neutral-950 rounded-lg p-2 text-white focus:ring-2 focus:ring-slate-200/50 focus:outline-none transition-all resize-none border-2 border-neutral-600 focus:border-neutral-200"
         placeholder={placeholder}
       />
     </div>

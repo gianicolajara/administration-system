@@ -1,4 +1,5 @@
 import Button from "@/app/dashboard/components/Button";
+import { formatDateYYYYmmdd } from "@/lib/formatDate";
 import { useDeleteBillMutation } from "@/redux/services/billApi";
 import { AssetsEnum, BillsEnum } from "@/types/enums/dashboard";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
@@ -36,6 +37,9 @@ const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
     <>
       <td className="border-2 border-neutral-700 p-4">{bill.billNumber}</td>
       <td className="border-2 border-neutral-700 p-4">
+        {formatDateYYYYmmdd(bill.createAt as Date)}
+      </td>
+      <td className="border-2 border-neutral-700 p-4">
         {BillsEnum[bill.billType]}
       </td>
       <td className="border-2 border-neutral-700 p-4">
@@ -45,6 +49,7 @@ const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
         {bill.typeOfCurrency.name}
       </td>
       <td className="border-2 border-neutral-700 p-4">{bill.amountMoney}</td>
+
       <td className="border-2 border-neutral-700 p-4">
         <div className="flex gap-x-2">
           <Button onClick={() => handleOpenModal(bill)}>Ver</Button>

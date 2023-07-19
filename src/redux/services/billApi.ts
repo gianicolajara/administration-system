@@ -7,10 +7,17 @@ export const billApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
   tagTypes: ["Bill"],
   endpoints: (builder) => ({
-    getAllBilles: builder.query<Array<IBillResponse>, void>({
+    getAllBilles: builder.query<
+      Array<IBillResponse>,
+      { startDate?: string; endDate?: string }
+    >({
       providesTags: ["Bill"],
-      query: () => ({
-        url: "bill",
+      query: ({ endDate = undefined, startDate = undefined }) => ({
+        url: `bill${
+          endDate && startDate
+            ? `?startDate=${startDate}&endDate=${endDate}`
+            : ""
+        }`,
         method: "GET",
         headers: {
           "Content-type": "application/json",

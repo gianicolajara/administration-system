@@ -38,6 +38,12 @@ const billSchema = new Schema<IBill>(
       ref: "User",
       required: true,
     },
+    createAt: {
+      type: Date,
+    },
+    updateAt: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
