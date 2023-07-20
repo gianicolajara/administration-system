@@ -1,3 +1,4 @@
+import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Money from "@/models/money";
 import { IMoney } from "@/types/interfaces/money";
@@ -8,6 +9,9 @@ export const PUT = async (
   { params }: { params: { id: string } }
 ) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const body: Partial<IMoney> = await request.json();
 
     if (!body.name) {

@@ -1,3 +1,4 @@
+import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Money from "@/models/money";
 import { IMoney } from "@/types/interfaces/money";
@@ -5,6 +6,9 @@ import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const body: IMoney = await request.json();
 
     if (!body.name)
@@ -39,6 +43,8 @@ export const POST = async (request: Request) => {
 
 export const GET = async () => {
   try {
+    const db = dbConfig();
+    db.connectDB();
     const monies = await Money.find({});
 
     return NextResponse.json(

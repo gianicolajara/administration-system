@@ -1,3 +1,4 @@
+import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Changes from "@/models/changes";
 import { IChanges } from "@/types/interfaces/changes";
@@ -5,6 +6,9 @@ import { NextResponse } from "next/server";
 
 export const POST = async (request: Request) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const body: IChanges = await request.json();
 
     if (!body.amount || !body.from || !body.to)
@@ -37,6 +41,9 @@ export const POST = async (request: Request) => {
 
 export const GET = async () => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const changes = await Changes.find({}).populate("from").populate("to");
 
     return NextResponse.json(

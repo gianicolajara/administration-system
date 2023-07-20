@@ -1,7 +1,7 @@
 import { IMoney, IMoneyModel } from "@/types/interfaces/money";
 import { Schema, model, models } from "mongoose";
 
-const moneySchema = new Schema<IMoney>(
+const MoneySchema = new Schema<IMoney>(
   {
     name: {
       type: String,
@@ -23,6 +23,6 @@ const moneySchema = new Schema<IMoney>(
 
 const Money =
   (models.Money as IMoneyModel) ||
-  model<IMoney, IMoneyModel>("Money", moneySchema);
+  model<IMoney, IMoneyModel>("Money", MoneySchema);
 
 export default Money;

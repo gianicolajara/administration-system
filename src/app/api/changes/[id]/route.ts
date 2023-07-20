@@ -1,3 +1,4 @@
+import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Changes from "@/models/changes";
 import { IChanges } from "@/types/interfaces/changes";
@@ -9,6 +10,9 @@ export const PUT = async (
   { params }: { params: { id: string } }
 ) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const body: Partial<IChanges> = await request.json();
 
     if (!body.amount || !body.from || !body.to) {
@@ -36,6 +40,8 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
     await Changes.findByIdAndDelete(params.id);
 
     return NextResponse.json(

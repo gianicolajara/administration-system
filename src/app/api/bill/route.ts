@@ -1,3 +1,4 @@
+import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Bill from "@/models/bill";
 import { IBill } from "@/types/interfaces/bill";
@@ -5,6 +6,9 @@ import { NextResponse } from "next/server";
 
 export const GET = async (request: Request) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const { searchParams } = new URL(request.url);
     const startDate = searchParams.get("startDate");
     const endDate = searchParams.get("endDate");
@@ -38,6 +42,9 @@ export const GET = async (request: Request) => {
 
 export const POST = async (request: Request) => {
   try {
+    const db = dbConfig();
+    db.connectDB();
+
     const body: IBill = await request.json();
 
     if (

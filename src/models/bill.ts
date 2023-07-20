@@ -1,8 +1,10 @@
 import { AssetsEnum, BillsEnum } from "@/types/enums/dashboard";
 import { IBill, IBillModel } from "@/types/interfaces/bill";
 import { Schema, model, models } from "mongoose";
+import Money from "./money";
+import User from "./user";
 
-const billSchema = new Schema<IBill>(
+const BillSchema = new Schema<IBill, IBillModel>(
   {
     billType: {
       type: Number,
@@ -18,8 +20,8 @@ const billSchema = new Schema<IBill>(
     },
     typeOfCurrency: {
       type: Schema.Types.ObjectId,
+      ref: Money,
       required: true,
-      ref: "Money",
     },
     amountMoney: {
       type: Number,
@@ -35,7 +37,7 @@ const billSchema = new Schema<IBill>(
     },
     user: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: User,
       required: true,
     },
     createAt: {
@@ -59,6 +61,6 @@ const billSchema = new Schema<IBill>(
 );
 
 const Bill =
-  (models.Bill as IBillModel) || model<IBill, IBillModel>("Bill", billSchema);
+  (models.Bill as IBillModel) || model<IBill, IBillModel>("Bill", BillSchema);
 
 export default Bill;

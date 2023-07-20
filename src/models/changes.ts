@@ -1,7 +1,7 @@
 import { IChanges, IModelChanges } from "@/types/interfaces/changes";
 import mongoose, { Schema, model, models } from "mongoose";
 
-const changeSchema = new Schema<IChanges>(
+const ChangeSchema = new Schema<IChanges>(
   {
     from: {
       type: mongoose.Schema.Types.ObjectId,
@@ -33,6 +33,6 @@ const changeSchema = new Schema<IChanges>(
 
 const Changes =
   (models.Changes as IModelChanges) ||
-  model<IChanges, IModelChanges>("Changes", changeSchema);
+  model<IChanges, IModelChanges>("Changes", ChangeSchema);
 
 export default Changes;
