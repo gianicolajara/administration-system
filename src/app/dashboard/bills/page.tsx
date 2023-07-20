@@ -63,7 +63,7 @@ const Create = () => {
     });
 
     socket.on("bill::update", (data: { id: string; updated: string }) => {
-      console.log("dentro de update");
+      console.log(data.updated);
       updateBillIdBySocketResponse(
         {
           ...JSON.parse(data.updated),
