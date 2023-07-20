@@ -44,7 +44,7 @@ const Table = ({
 
   return (
     <div className="h-min w-full border-2 border-neutral-700 bg-neutral-900 rounded-lg p-4">
-      <div className="flex gap-x-2 items-center w-full flex-col lg:flex-row">
+      <div className="flex gap-x-2 items-center w-full flex-col lg:flex-row mb-4 lg:mb-0">
         {addFilter && (
           <div className="py-4 w-full">
             <InputText

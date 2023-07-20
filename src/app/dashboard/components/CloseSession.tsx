@@ -27,7 +27,7 @@ const CloseSession = () => {
   return (
     <div className="flex gap-x-2 w-full min-w-max items-center justify-between">
       <div></div>
-      <div className="flex gap-x-2">
+      <div className="flex gap-x-2 items-center">
         <P>
           Bienvenido, <strong>{data?.user?.username}</strong>
         </P>
