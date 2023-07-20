@@ -14,19 +14,19 @@ type Props = {
 const DateRange = ({ onChangeDatePicker, valueDatePicker }: Props) => {
   return (
     <DateRangePicker
-      className="w-full"
+      className="w-full text-sm lg:text-base"
       onChange={onChangeDatePicker}
       value={valueDatePicker}
       clearIcon={
         <AiOutlineClose
           className="text-white hover:text-primary transition-all"
-          size={20}
+          size={15}
         />
       }
       calendarIcon={
         <AiFillCalendar
           className="text-white hover:text-primary transition-all"
-          size={20}
+          size={15}
         />
       }
     />

@@ -15,7 +15,7 @@
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover {
-  background: #000000 !important;
+  background: #292929 !important;
 }
 
 .react-calendar__tile--active {
@@ -23,7 +23,7 @@
 }
 
 .react-calendar__tile:hover {
-  background-color: #000000 !important;
+  background-color: #484848 !important;
 }
 
 .react-calendar__tile--now {
@@ -32,4 +32,23 @@
 
 .react-calendar__month-view__days__day--weekend {
   color: #ff8400 !important;
+}
+
+.react-daterange-picker__wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px 0px !important;
+}
+
+.react-daterange-picker__inputGroup {
+  flex-grow: 0 !important;
+  min-width: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.react-calendar__navigation__label:hover,
+.react-calendar__navigation__arrow:hover {
+  background-color: #292929 !important;
 }
