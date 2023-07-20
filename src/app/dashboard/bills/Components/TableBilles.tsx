@@ -13,6 +13,8 @@ type Props = {
   handleOpen: () => void;
   valueDatePicker?: Value;
   onChangeDatePicker?: Dispatch<SetStateAction<Value>>;
+  setModalDataDelete: Dispatch<SetStateAction<IBillResponse | undefined>>;
+  handleOpenDelete: () => void;
 };
 
 const TableBilles = ({
@@ -23,6 +25,8 @@ const TableBilles = ({
   handleOpen,
   onChangeDatePicker,
   valueDatePicker,
+  handleOpenDelete,
+  setModalDataDelete,
 }: Props) => {
   const generateHead = (): Array<Head> => {
     return [
@@ -71,6 +75,8 @@ const TableBilles = ({
               setFormData={setFormData}
               setModalData={setModalData}
               handleOpen={handleOpen}
+              handleOpenDelete={handleOpenDelete}
+              setModalDataDelete={setModalDataDelete}
             />
           ),
         },

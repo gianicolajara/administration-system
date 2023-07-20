@@ -1,6 +1,5 @@
 import Button from "@/app/dashboard/components/Button";
 import { formatDateYYYYmmdd } from "@/lib/formatDate";
-import { useDeleteBillMutation } from "@/redux/services/billApi";
 import { AssetsEnum, BillsEnum } from "@/types/enums/dashboard";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { Dispatch, SetStateAction } from "react";
@@ -10,11 +9,18 @@ type Props = {
   setFormData: Dispatch<SetStateAction<IBill>>;
   setModalData: Dispatch<SetStateAction<IBillResponse | undefined>>;
   handleOpen: () => void;
+  handleOpenDelete: () => void;
+  setModalDataDelete: Dispatch<SetStateAction<IBillResponse | undefined>>;
 };
 
-const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
-  const [deleteBill, { isLoading }] = useDeleteBillMutation();
-
+const ItemBill = ({
+  bill,
+  setFormData,
+  setModalData,
+  handleOpen,
+  setModalDataDelete,
+  handleOpenDelete,
+}: Props) => {
   const handleSetFormData = (bill: IBillResponse) => {
     setFormData({
       id: bill.id as string,
@@ -31,6 +37,11 @@ const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
   const handleOpenModal = (bill: IBillResponse) => {
     setModalData(bill);
     handleOpen();
+  };
+
+  const handleOpenModalDelete = (bill: IBillResponse) => {
+    setModalDataDelete(bill);
+    handleOpenDelete();
   };
 
   console.log(bill);
@@ -56,12 +67,7 @@ const ItemBill = ({ bill, setFormData, setModalData, handleOpen }: Props) => {
         <div className="flex gap-x-2">
           <Button onClick={() => handleOpenModal(bill)}>Ver</Button>
           <Button onClick={() => handleSetFormData(bill)}>Editar</Button>
-          <Button
-            loading={isLoading}
-            onClick={() => deleteBill(bill.id as string)}
-          >
-            Borrar
-          </Button>
+          <Button onClick={() => handleOpenModalDelete(bill)}>Borrar</Button>
         </div>
       </td>
     </>

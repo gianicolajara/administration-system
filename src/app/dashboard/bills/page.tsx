@@ -1,9 +1,13 @@
 "use client";
 
+import ModalDelete from "@/app/components/ModalDelete";
 import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
-import { useGetAllBillesQuery } from "@/redux/services/billApi";
+import {
+  useDeleteBillMutation,
+  useGetAllBillesQuery,
+} from "@/redux/services/billApi";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
@@ -37,8 +41,31 @@ const Create = () => {
     }
   }, [multiPickerValue, refetch]);
 
+  const {
+    handleClose: handleCloseDelete,
+    handleOpen: handleOpenDelete,
+    open: openDelete,
+    saveData: saveDataDelete,
+    setSaveData: setSaveDataDelete,
+    setOpen: setOpenDelete,
+  } = useModal<IBillResponse>();
+
+  const [deleteChange, { isLoading: deleteLoading, isSuccess, isError }] =
+    useDeleteBillMutation();
+
   return (
     <>
+      <ModalDelete<IBillResponse>
+        handleClose={handleCloseDelete}
+        isError={isError}
+        isSuccess={isSuccess}
+        loading={deleteLoading}
+        name={saveDataDelete?.billNumber as string}
+        onYes={(item) => deleteChange(item.id as string)}
+        open={openDelete}
+        setOpen={setOpenDelete}
+        item={saveDataDelete}
+      />
       <ModalBill
         open={open}
         bill={saveData}
@@ -64,6 +91,8 @@ const Create = () => {
             handleOpen={handleOpen}
             valueDatePicker={multiPickerValue}
             onChangeDatePicker={setMultiPickerValue}
+            handleOpenDelete={handleOpenDelete}
+            setModalDataDelete={setSaveDataDelete}
           />
         </section>
       </section>
