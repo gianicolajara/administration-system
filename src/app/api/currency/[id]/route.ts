@@ -4,6 +4,7 @@ import Money from "@/models/money";
 import { IMoney } from "@/types/interfaces/money";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
+import uniqid from "uniqid";
 
 export const PUT = async (
   request: Request,
@@ -40,10 +41,28 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   try {
+    console.log(params.id);
+
     const db = dbConfig();
     db.connectDB();
 
-    await Money.findByIdAndDelete(new mongoose.Types.ObjectId(params.id));
+    const currency = await Money.findById(
+      new mongoose.Types.ObjectId(params.id)
+    );
+
+    if (!currency) {
+      return NextResponse.json(
+        {
+          message: "La moneda no existe",
+        },
+        { status: 400 }
+      );
+    }
+
+    await Money.findByIdAndUpdate(new mongoose.Types.ObjectId(params.id), {
+      name: `${currency.name}-delete-${uniqid()}`,
+      delete: true,
+    });
 
     return NextResponse.json(
       {

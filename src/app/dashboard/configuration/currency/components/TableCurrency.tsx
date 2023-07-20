@@ -8,9 +8,17 @@ type Props = {
   currencies?: Array<IMoney>;
   loading: boolean;
   setFormData: Dispatch<SetStateAction<IMoney>>;
+  setSaveData: Dispatch<SetStateAction<IMoney | undefined>>;
+  handleOpen: () => void;
 };
 
-const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
+const TableCurrency = ({
+  currencies,
+  loading,
+  setFormData,
+  setSaveData,
+  handleOpen,
+}: Props) => {
   const handleSetFormCurrency = (currency: IMoney) => {
     setFormData({
       id: currency.id,
@@ -43,6 +51,8 @@ const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
             <ItemCurrency
               currency={item}
               handleSetFormCurrency={handleSetFormCurrency}
+              setSaveData={setSaveData}
+              handleOpen={handleOpen}
             />
           ),
         },

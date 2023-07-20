@@ -1,15 +1,25 @@
 import Button from "@/app/dashboard/components/Button";
-import { useDeleteCurrencyMutation } from "@/redux/services/currencyApi";
 import { IMoney } from "@/types/interfaces/money";
+import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   currency: IMoney;
   // eslint-disable-next-line no-unused-vars
   handleSetFormCurrency: (currency: IMoney) => void;
+  setSaveData: Dispatch<SetStateAction<IMoney | undefined>>;
+  handleOpen: () => void;
 };
 
-const ItemCurrency = ({ currency, handleSetFormCurrency }: Props) => {
-  const [deleteCurrency, { isLoading }] = useDeleteCurrencyMutation();
+const ItemCurrency = ({
+  currency,
+  handleSetFormCurrency,
+  setSaveData,
+  handleOpen,
+}: Props) => {
+  const handleDelete = (item: IMoney) => {
+    setSaveData(item);
+    handleOpen();
+  };
 
   return (
     <>
@@ -19,12 +29,7 @@ const ItemCurrency = ({ currency, handleSetFormCurrency }: Props) => {
           <Button onClick={() => handleSetFormCurrency(currency)}>
             Editar
           </Button>
-          <Button
-            loading={isLoading}
-            onClick={() => deleteCurrency({ id: currency.id as string })}
-          >
-            Borrar
-          </Button>
+          <Button onClick={() => handleDelete(currency)}>Borrar</Button>
         </div>
       </td>
     </>

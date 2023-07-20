@@ -4,6 +4,8 @@ import Bill from "@/models/bill";
 import { IBill } from "@/types/interfaces/bill";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export const GET = async (request: Request) => {
   try {
     const db = dbConfig();

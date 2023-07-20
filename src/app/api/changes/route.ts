@@ -4,6 +4,8 @@ import Changes from "@/models/changes";
 import { IChanges } from "@/types/interfaces/changes";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export const POST = async (request: Request) => {
   try {
     const db = dbConfig();
@@ -44,7 +46,11 @@ export const GET = async () => {
     const db = dbConfig();
     db.connectDB();
 
-    const changes = await Changes.find({}).populate("from").populate("to");
+    const changes = await Changes.find({
+      delete: false,
+    })
+      .populate("from")
+      .populate("to");
 
     return NextResponse.json(
       {

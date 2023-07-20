@@ -24,11 +24,6 @@ const Create = () => {
       : undefined,
   });
 
-  useEffect(() => {
-    console.log("la data cambio");
-    console.log(data);
-  }, [data]);
-
   const { formData, handleChange, setFormData, handleReset } = useForm<IBill>({
     initialState: initialStateForm,
   });

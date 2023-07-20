@@ -1,23 +1,33 @@
 import Button from "@/app/dashboard/components/Button";
-import { useDeleteChangeMutation } from "@/redux/services/changesApi";
 import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
 import { Dispatch, SetStateAction } from "react";
 
 type Props = {
   changes: IChangesResponse;
   setFormData: Dispatch<SetStateAction<IChanges>>;
+  setSaveData: Dispatch<SetStateAction<IChangesResponse | undefined>>;
+  handleOpen: () => void;
 };
 
-const ItemChanges = ({ changes, setFormData }: Props) => {
-  const [deleteChange, { isLoading }] = useDeleteChangeMutation();
-
+const ItemChanges = ({
+  changes,
+  setFormData,
+  setSaveData,
+  handleOpen,
+}: Props) => {
   const handleSetFormData = (change: IChangesResponse) => {
     setFormData({
       id: change.id as string,
       from: change.from.id as string,
       to: change.to.id as string,
       amount: change.amount,
+      delete: change.delete,
     });
+  };
+
+  const handleOpenModalChangesDelte = (item: IChangesResponse) => {
+    handleOpen();
+    setSaveData(item);
   };
 
   return (
@@ -28,10 +38,7 @@ const ItemChanges = ({ changes, setFormData }: Props) => {
       <td className="border-2 border-neutral-700 p-2">
         <div className="flex gap-x-2">
           <Button onClick={() => handleSetFormData(changes)}>Editar</Button>
-          <Button
-            onClick={() => deleteChange(changes.id ?? "")}
-            loading={isLoading}
-          >
+          <Button onClick={() => handleOpenModalChangesDelte(changes)}>
             Borrar
           </Button>
         </div>

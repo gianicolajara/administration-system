@@ -17,6 +17,10 @@ const ChangeSchema = new Schema<IChanges>(
       type: Number,
       required: true,
     },
+    delete: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

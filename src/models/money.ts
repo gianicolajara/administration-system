@@ -1,11 +1,15 @@
 import { IMoney, IMoneyModel } from "@/types/interfaces/money";
 import { Schema, model, models } from "mongoose";
 
-const MoneySchema = new Schema<IMoney>(
+const MoneySchema = new Schema<IMoney, IMoneyModel>(
   {
     name: {
       type: String,
       required: true,
+    },
+    delete: {
+      type: Boolean,
+      default: false,
     },
   },
   {

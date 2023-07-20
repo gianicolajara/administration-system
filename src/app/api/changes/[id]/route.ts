@@ -42,7 +42,10 @@ export const DELETE = async (
   try {
     const db = dbConfig();
     db.connectDB();
-    await Changes.findByIdAndDelete(params.id);
+
+    await Changes.findByIdAndUpdate(params.id, {
+      delete: true,
+    });
 
     return NextResponse.json(
       {

@@ -26,7 +26,7 @@ export const POST = async (request: Request) => {
 
     return NextResponse.json(
       {
-        message: "Usuario creado satifactoriamente",
+        message: "Moneda creada satifactoriamente",
         user: moneySaved,
       },
       {
@@ -43,7 +43,7 @@ export const GET = async () => {
     const db = dbConfig();
     db.connectDB();
 
-    const currency = await Money.find({});
+    const currency = await Money.find({ delete: false });
 
     return NextResponse.json({
       message: "Las monedas fueron conseguidos exitosamente",

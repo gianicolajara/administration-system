@@ -8,9 +8,17 @@ type Props = {
   changes?: Array<IChangesResponse>;
   loading: boolean;
   setFormData: Dispatch<SetStateAction<IChanges>>;
+  setSaveData: Dispatch<SetStateAction<IChangesResponse | undefined>>;
+  handleOpen: () => void;
 };
 
-const TableChanges = ({ loading, changes, setFormData }: Props) => {
+const TableChanges = ({
+  loading,
+  changes,
+  setFormData,
+  setSaveData,
+  handleOpen,
+}: Props) => {
   const generateHead = (): Array<Head> => {
     return [
       {
@@ -40,7 +48,14 @@ const TableChanges = ({ loading, changes, setFormData }: Props) => {
       filter: item.id,
       subData: [
         {
-          subItem: <ItemChanges changes={item} setFormData={setFormData} />,
+          subItem: (
+            <ItemChanges
+              changes={item}
+              setFormData={setFormData}
+              handleOpen={handleOpen}
+              setSaveData={setSaveData}
+            />
+          ),
         },
       ],
     }));
