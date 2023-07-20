@@ -1,6 +1,4 @@
-import P from "@/app/components/P";
 import Table from "@/app/components/Table";
-import Loader from "@/app/dashboard/components/Loader";
 import { IMoney } from "@/types/interfaces/money";
 import { BodyData, Head } from "@/types/types/table";
 import { Dispatch, SetStateAction } from "react";
@@ -13,12 +11,6 @@ type Props = {
 };
 
 const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
-  if (loading) return <Loader />;
-
-  if (currencies?.length === 0) return <P>Sin Data</P>;
-
-  if (!currencies) return <P>Algo fue mal</P>;
-
   const handleSetFormCurrency = (currency: IMoney) => {
     setFormData({
       id: currency.id,
@@ -40,7 +32,9 @@ const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
   };
 
   const generateBody = (): Array<BodyData> => {
-    return currencies.map((item) => ({
+    if (!currencies) return [];
+
+    return currencies?.map((item) => ({
       id: item.id as string,
       filter: item.name,
       subData: [
@@ -57,7 +51,12 @@ const TableCurrency = ({ currencies, loading, setFormData }: Props) => {
   };
 
   return (
-    <Table addFilter={false} body={generateBody()} head={generateHead()} />
+    <Table
+      addFilter={false}
+      body={generateBody()}
+      head={generateHead()}
+      isLoading={loading}
+    />
   );
 };
 

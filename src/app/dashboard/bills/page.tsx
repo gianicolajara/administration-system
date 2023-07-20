@@ -3,17 +3,10 @@
 import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
-import {
-  addBillBySocketResponse,
-  deleteBillBySoscketResponse,
-  updateBillIdBySocketResponse,
-  useGetAllBillesQuery,
-} from "@/redux/services/billApi";
+import { useGetAllBillesQuery } from "@/redux/services/billApi";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { io } from "socket.io-client";
 import FormCreateBill from "./Components/FormCreateBill";
 import ModalBill from "./Components/ModalBill";
 import TableBilles from "./Components/TableBilles";
@@ -21,8 +14,6 @@ import { initialStateForm } from "./utils/bills";
 
 const Create = () => {
   const [multiPickerValue, setMultiPickerValue] = useState<Value>([null, null]);
-
-  const dispatch = useDispatch();
 
   const { isLoading, data, refetch } = useGetAllBillesQuery({
     startDate: multiPickerValue
@@ -32,6 +23,11 @@ const Create = () => {
       ? (multiPickerValue as Array<Date>)[1]?.toString()
       : undefined,
   });
+
+  useEffect(() => {
+    console.log("la data cambio");
+    console.log(data);
+  }, [data]);
 
   const { formData, handleChange, setFormData, handleReset } = useForm<IBill>({
     initialState: initialStateForm,
@@ -45,45 +41,6 @@ const Create = () => {
       refetch();
     }
   }, [multiPickerValue, refetch]);
-
-  useEffect(() => {
-    const socket = io(process.env.SOCKET_URI as string, {
-      reconnectionDelayMax: 10000,
-      path: "/api/socket",
-    });
-
-    socket.on("connect", () => {
-      console.log("Socket Connected ", socket.id);
-    });
-
-    socket.on("bill::insert", (bill: IBillResponse) => {
-      console.log("dentro de insert");
-      console.log(bill);
-      addBillBySocketResponse(bill, dispatch);
-    });
-
-    socket.on("bill::update", (data: { id: string; updated: string }) => {
-      console.log(data.updated);
-      updateBillIdBySocketResponse(
-        {
-          ...JSON.parse(data.updated),
-          id: data.id,
-        } as IBillResponse,
-        dispatch
-      );
-    });
-
-    socket.on("bill::delete", (id: string) => {
-      console.log("dentro de delete");
-      deleteBillBySoscketResponse(id, dispatch);
-    });
-
-    return () => {
-      socket.disconnect();
-    };
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>

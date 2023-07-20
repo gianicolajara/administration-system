@@ -1,5 +1,4 @@
 import Table from "@/app/components/Table";
-import Loader from "@/app/dashboard/components/Loader";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { BodyData, Head } from "@/types/types/table";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
@@ -25,8 +24,6 @@ const TableBilles = ({
   onChangeDatePicker,
   valueDatePicker,
 }: Props) => {
-  if (loading) return <Loader />;
-
   const generateHead = (): Array<Head> => {
     return [
       {
@@ -89,6 +86,7 @@ const TableBilles = ({
       body={generateBody()}
       onChangeDatePicker={onChangeDatePicker}
       valueDatePicker={valueDatePicker}
+      isLoading={loading}
     />
   );
 };

@@ -1,6 +1,4 @@
-import P from "@/app/components/P";
 import Table from "@/app/components/Table";
-import Loader from "@/app/dashboard/components/Loader";
 import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
 import { BodyData, Head } from "@/types/types/table";
 import { Dispatch, SetStateAction } from "react";
@@ -13,12 +11,6 @@ type Props = {
 };
 
 const TableChanges = ({ loading, changes, setFormData }: Props) => {
-  if (loading) return <Loader />;
-
-  if (changes?.length === 0) return <P>Sin Data</P>;
-
-  if (!changes) return <P>Algo fue mal</P>;
-
   const generateHead = (): Array<Head> => {
     return [
       {
@@ -41,6 +33,8 @@ const TableChanges = ({ loading, changes, setFormData }: Props) => {
   };
 
   const generateBody = (): Array<BodyData> => {
+    if (!changes) return [];
+
     return changes?.map((item) => ({
       id: item.id as string,
       filter: item.id,
@@ -53,7 +47,12 @@ const TableChanges = ({ loading, changes, setFormData }: Props) => {
   };
 
   return (
-    <Table addFilter={false} body={generateBody()} head={generateHead()} />
+    <Table
+      addFilter={false}
+      body={generateBody()}
+      head={generateHead()}
+      isLoading={loading}
+    />
   );
 };
 

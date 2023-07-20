@@ -1,18 +1,17 @@
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
-import { AppDispatch } from "@/types/types/redux";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { urlApi } from "./config";
 
 export const billApi = createApi({
   reducerPath: "billApi",
   baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
-  /* tagTypes: ["Bill"], */
+  tagTypes: ["Bill"],
   endpoints: (builder) => ({
     getAllBilles: builder.query<
       Array<IBillResponse>,
       { startDate?: string; endDate?: string }
     >({
-      /* providesTags: ["Bill"], */
+      providesTags: ["Bill"],
       query: ({ endDate = undefined, startDate = undefined }) => ({
         url: `bill${
           endDate && startDate
@@ -32,7 +31,7 @@ export const billApi = createApi({
       },
     }),
     createBill: builder.mutation<void, Partial<IBill>>({
-      /* invalidatesTags: ["Bill"], */
+      invalidatesTags: ["Bill"],
       query: (arg) => ({
         url: "bill",
         method: "POST",
@@ -46,7 +45,7 @@ export const billApi = createApi({
       },
     }),
     updateBill: builder.mutation<void, { id: string; change: Partial<IBill> }>({
-      /* invalidatesTags: ["Bill"], */
+      invalidatesTags: ["Bill"],
       query: (arg) => ({
         url: `bill/${arg.id}`,
         method: "PUT",
@@ -60,7 +59,7 @@ export const billApi = createApi({
       },
     }),
     deleteBill: builder.mutation<void, string>({
-      /* invalidatesTags: ["Bill"], */
+      invalidatesTags: ["Bill"],
       query: (arg) => ({
         url: `bill/${arg}`,
         method: "DELETE",
@@ -72,7 +71,7 @@ export const billApi = createApi({
   }),
 });
 
-export const addBillBySocketResponse = (
+/* export const addBillBySocketResponse = (
   bill: IBillResponse,
   dispatch: AppDispatch
 ) => {
@@ -112,7 +111,7 @@ export const updateBillIdBySocketResponse = (
       return draft;
     })
   );
-};
+}; */
 
 export const {
   useCreateBillMutation,

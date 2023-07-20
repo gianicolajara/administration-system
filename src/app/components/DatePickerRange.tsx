@@ -1,6 +1,8 @@
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import { Dispatch, SetStateAction } from "react";
+import "react-calendar/dist/Calendar.css";
 import { AiFillCalendar, AiOutlineClose } from "react-icons/ai";
 
 type Props = {

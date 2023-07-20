@@ -33,7 +33,3 @@
 .react-calendar__month-view__days__day--weekend {
   color: #ff8400 !important;
 }
-
-.react-daterange-picker__calendar-button__icon {
-  color: red !important;
-}

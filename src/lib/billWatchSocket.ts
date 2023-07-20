@@ -1,4 +1,4 @@
-import Bill from "@/models/bill";
+/* import Bill from "@/models/bill";
 import Money from "@/models/money";
 import User from "@/models/user";
 import { IBillModel, IBillResponse } from "@/types/interfaces/bill";
@@ -24,7 +24,6 @@ const billWatchSocket = (io: Server) => {
 
     if (data.operationType === "update") {
       let item = data.updateDescription.updatedFields as Partial<IBillResponse>;
-
       let itemToSend = {};
 
       if (item.typeOfCurrency) {
@@ -48,3 +47,4 @@ const billWatchSocket = (io: Server) => {
 };
 
 export default billWatchSocket;
+ */
