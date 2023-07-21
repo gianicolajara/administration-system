@@ -2,11 +2,9 @@
 
 import { Dispatch, SetStateAction } from "react";
 
-import P from "@/app/components/P";
 import Table from "@/app/components/Table";
 import { IUser } from "@/types/interfaces/user";
 import { BodyData, Head } from "@/types/types/table";
-import Loader from "../../components/Loader";
 import ItemUser from "./ItemUser";
 
 type Props = {
@@ -22,11 +20,6 @@ type Props = {
 };
 
 const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
-  if (loading) return <Loader />;
-
-  if (!users) return <P>Algo fue mal</P>;
-  if (users?.length === 0) return <P>Sin Data</P>;
-
   const handleSetFormUser = (item: IUser) => {
     setFormDataUser({
       id: item.id,
@@ -49,7 +42,9 @@ const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
   };
 
   const generateBody = (): Array<BodyData> => {
-    return users.map((item) => ({
+    if (!users) return [];
+
+    return users?.map((item) => ({
       id: item.id as string,
       filter: item.username,
       subData: [
@@ -62,7 +57,14 @@ const ListOfUsers = ({ users, loading, setFormDataUser }: Props) => {
     }));
   };
 
-  return <Table addFilter={true} head={generateHead()} body={generateBody()} />;
+  return (
+    <Table
+      addFilter={true}
+      head={generateHead()}
+      body={generateBody()}
+      isLoading={loading}
+    />
+  );
 };
 
 export default ListOfUsers;

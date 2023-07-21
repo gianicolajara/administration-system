@@ -18,7 +18,11 @@ const ItemUser = ({ user, handleSetFormUser }: Props) => {
       <td className="border-2 border-neutral-700 p-4">{user.username}</td>
       <td className="border-2 border-neutral-700 px-2">
         <div className="flex items-center gap-x-2">
-          <ButtonIcon loading={isLoading} onClick={() => desactivate(user.id)}>
+          <ButtonIcon
+            loading={isLoading}
+            onClick={() => desactivate(user.id)}
+            toolTip="Desactivar/Activar un usuario"
+          >
             {user.active ? (
               <AiFillEye size={20} />
             ) : (
