@@ -10,6 +10,7 @@ import {
 } from "@/redux/services/changesApi";
 import { IChangesResponse } from "@/types/interfaces/changes";
 import FormChanges from "./components/FormChanges";
+import SuggestionChange from "./components/SuggestionChange";
 import TableChanges from "./components/TableChanges";
 import { initialState } from "./utils/createForm";
 
@@ -43,6 +44,11 @@ const Changes = () => {
         <div className="mb-4">
           <SubTitle>Cambios</SubTitle>
         </div>
+
+        <div>
+          <SuggestionChange />
+        </div>
+
         <div className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
           <FormChanges
             formData={formData}

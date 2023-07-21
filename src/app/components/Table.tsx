@@ -90,7 +90,7 @@ const Table = ({
         )}
       </div>
 
-      <div className="w-full mb-4 flex gap-x-1">
+      <div className="w-full mb-4 flex gap-x-1 flex-wrap">
         {pagination
           ? Array(Math.ceil(body.length / amountPage))
               .fill(0)

@@ -21,8 +21,11 @@ const useFetch = <T>({
   function newAbortSignal(timeoutMs: number) {
     const abortController = new AbortController();
     setTimeout(() => abortController.abort(), timeoutMs || 0);
-    return abortController.signal;
+    return abortController;
   }
+
+  const abortController = newAbortSignal(10000);
+  const signal = abortController.signal;
 
   const handlerHttp = useCallback(() => {
     if (loading) return;
@@ -36,7 +39,7 @@ const useFetch = <T>({
       method,
       url,
       data: JSON.stringify(body),
-      signal: newAbortSignal(10000),
+      signal: signal,
       headers: {
         "Content-Type": "application/json",
       },
@@ -101,6 +104,13 @@ const useFetch = <T>({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [start]);
+
+  useEffect(() => {
+    return () => {
+      abortController.abort();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     error,
