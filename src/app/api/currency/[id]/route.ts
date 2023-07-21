@@ -41,8 +41,6 @@ export const DELETE = async (
   { params }: { params: { id: string } }
 ) => {
   try {
-    console.log(params.id);
-
     const db = dbConfig();
     db.connectDB();
 

@@ -44,8 +44,6 @@ const ItemBill = ({
     handleOpenDelete();
   };
 
-  console.log(bill);
-
   return (
     <>
       <td className="border-2 border-neutral-700 p-4">{bill.billNumber}</td>

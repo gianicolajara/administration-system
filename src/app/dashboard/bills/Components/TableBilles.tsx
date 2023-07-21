@@ -93,6 +93,8 @@ const TableBilles = ({
       onChangeDatePicker={onChangeDatePicker}
       valueDatePicker={valueDatePicker}
       isLoading={loading}
+      pagination={true}
+      amountPage={5}
     />
   );
 };

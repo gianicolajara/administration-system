@@ -50,18 +50,17 @@ const Create = () => {
     setOpen: setOpenDelete,
   } = useModal<IBillResponse>();
 
-  const [deleteChange, { isLoading: deleteLoading, isSuccess, isError }] =
-    useDeleteBillMutation();
+  const [deleteChange, { isLoading: deleteLoading }] = useDeleteBillMutation();
 
   return (
     <>
       <ModalDelete<IBillResponse>
         handleClose={handleCloseDelete}
-        isError={isError}
-        isSuccess={isSuccess}
         loading={deleteLoading}
         name={saveDataDelete?.billNumber as string}
-        onYes={(item) => deleteChange(item.id as string)}
+        onYes={async (item) => {
+          await deleteChange(item.id as string);
+        }}
         open={openDelete}
         setOpen={setOpenDelete}
         item={saveDataDelete}

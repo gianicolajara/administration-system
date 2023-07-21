@@ -11,8 +11,6 @@ export function LoadingLayout() {
     const url = `${pathname}?${searchParams}`;
     // You can now use the current URL
     // ...
-
-    console.log(url);
   }, [pathname, searchParams]);
 
   return null;

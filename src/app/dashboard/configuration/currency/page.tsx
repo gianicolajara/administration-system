@@ -1,5 +1,6 @@
 "use client";
 
+import ModalDelete from "@/app/components/ModalDelete";
 import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
@@ -9,7 +10,6 @@ import {
 } from "@/redux/services/currencyApi";
 import { IMoney } from "@/types/interfaces/money";
 import FormCurrency from "./components/FormCurrency";
-import ModalCurrency from "./components/ModalCurrency";
 import TableCurrency from "./components/TableCurrency";
 
 const initialState: IMoney = {
@@ -26,24 +26,21 @@ const Currency = () => {
   const { handleClose, handleOpen, open, saveData, setSaveData, setOpen } =
     useModal<IMoney>();
 
-  const [deleteCurrency, { isLoading: deleteLoading, isSuccess, isError }] =
+  const [deleteCurrency, { isLoading: deleteLoading }] =
     useDeleteCurrencyMutation();
 
   return (
     <>
-      <ModalCurrency
+      <ModalDelete<IMoney>
         handleClose={handleClose}
-        isError={isError}
-        isSuccess={isSuccess}
         loading={deleteLoading}
-        onYes={(item) =>
-          deleteCurrency({
-            id: item.id as string,
-          })
-        }
+        name={saveData?.name as string}
+        onYes={async (item) => {
+          await deleteCurrency({ id: item.id as string });
+        }}
         open={open}
         setOpen={setOpen}
-        currency={saveData}
+        item={saveData}
       />
 
       <div className="w-full h-full">

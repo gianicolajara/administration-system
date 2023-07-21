@@ -6,6 +6,7 @@ import {
   Dispatch,
   SetStateAction,
   isValidElement,
+  useMemo,
   useState,
 } from "react";
 
@@ -23,6 +24,8 @@ export type Props = {
   valueDatePicker?: Value;
   onChangeDatePicker?: Dispatch<SetStateAction<Value>>;
   isLoading?: boolean;
+  pagination?: boolean;
+  amountPage?: number;
 };
 
 const Table = ({
@@ -33,14 +36,38 @@ const Table = ({
   onChangeDatePicker,
   valueDatePicker,
   isLoading,
+  pagination = false,
+  amountPage = 0,
 }: Props) => {
   const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
 
   const handleChange = addFilter
     ? (e: ChangeEvent<HTMLInputElement>) => {
         setFilter(e.target.value);
       }
     : () => {};
+
+  const itemFilter = useMemo(
+    () =>
+      filter && filter.length > 0
+        ? body?.filter((item) => item.filter?.includes(filter))
+        : body,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filter, body]
+  );
+
+  const paginationChangeHandler = (index: number) => {
+    setPage(index);
+  };
+
+  const handlePagination = useMemo(
+    () =>
+      pagination
+        ? itemFilter.slice((page - 1) * amountPage, amountPage * page)
+        : itemFilter,
+    [amountPage, itemFilter, page, pagination]
+  );
 
   return (
     <div className="h-min w-full border-2 border-neutral-700 bg-neutral-900 rounded-lg p-4">
@@ -61,6 +88,24 @@ const Table = ({
             valueDatePicker={valueDatePicker}
           />
         )}
+      </div>
+
+      <div className="w-full mb-4 flex gap-x-1">
+        {pagination
+          ? Array(Math.ceil(body.length / amountPage))
+              .fill(0)
+              .map((item, index) => (
+                <div
+                  className={`w-[25px] h-[25px] bg-neutral-800 flex justify-center items-center text-white p-4 rounded-lg cursor-pointer ${
+                    page === index + 1 ? "bg-primary" : ""
+                  }`}
+                  key={index}
+                  onClick={() => paginationChangeHandler(index + 1)}
+                >
+                  {index + 1}
+                </div>
+              ))
+          : null}
       </div>
 
       <div className="overflow-x-auto w-full">
@@ -99,19 +144,17 @@ const Table = ({
               </tr>
             )}
             {!isLoading &&
-              body
-                ?.filter((item) => item.filter?.includes(filter))
-                .map((item) =>
-                  isValidElement(item.subData[0].subItem) ? (
-                    <tr key={uniqid()}>{item.subData[0].subItem}</tr>
-                  ) : (
-                    <tr key={item.id}>
-                      {item.subData?.map((subItemData) => (
-                        <td key={uniqid()}>{subItemData.subItem}</td>
-                      ))}
-                    </tr>
-                  )
-                )}
+              handlePagination.map((item) =>
+                isValidElement(item.subData[0].subItem) ? (
+                  <tr key={uniqid()}>{item.subData[0].subItem}</tr>
+                ) : (
+                  <tr key={item.id}>
+                    {item.subData?.map((subItemData) => (
+                      <td key={uniqid()}>{subItemData.subItem}</td>
+                    ))}
+                  </tr>
+                )
+              )}
           </tbody>
         </table>
       </div>

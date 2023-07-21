@@ -1,5 +1,6 @@
 "use client";
 
+import ModalDelete from "@/app/components/ModalDelete";
 import SubTitle from "@/app/components/SubTitle";
 import useForm from "@/hooks/useForm";
 import useModal from "@/hooks/useModal";
@@ -9,7 +10,6 @@ import {
 } from "@/redux/services/changesApi";
 import { IChangesResponse } from "@/types/interfaces/changes";
 import FormChanges from "./components/FormChanges";
-import ModalChanges from "./components/ModalChanges";
 import TableChanges from "./components/TableChanges";
 import { initialState } from "./utils/createForm";
 
@@ -23,20 +23,21 @@ const Changes = () => {
   const { handleClose, handleOpen, open, saveData, setSaveData, setOpen } =
     useModal<IChangesResponse>();
 
-  const [deleteChange, { isLoading: deleteLoading, isSuccess, isError }] =
+  const [deleteChange, { isLoading: deleteLoading }] =
     useDeleteChangeMutation();
 
   return (
     <>
-      <ModalChanges
+      <ModalDelete<IChangesResponse>
+        handleClose={handleClose}
+        loading={deleteLoading}
+        name={`de ${saveData?.from.name} a ${saveData?.to.name}`}
+        onYes={async (item) => {
+          await deleteChange(item.id as string);
+        }}
         open={open}
         setOpen={setOpen}
-        handleClose={handleClose}
-        changes={saveData}
-        onYes={(item) => deleteChange(item.id as string)}
-        loading={deleteLoading}
-        isError={isError}
-        isSuccess={isSuccess}
+        item={saveData}
       />
       <div className="w-full h-full">
         <div className="mb-4">

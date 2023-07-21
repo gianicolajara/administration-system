@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Button from "../dashboard/components/Button";
 import Modal from "./Modal";
 import P from "./P";
@@ -9,17 +9,13 @@ type Props<T> = {
   setOpen: Dispatch<SetStateAction<boolean>>;
   handleClose: () => void;
   // eslint-disable-next-line no-unused-vars
-  onYes: (item: T) => void;
+  onYes: (item: T) => Promise<void>;
   loading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
   name: string;
 };
 
 const ModalDelete = <T,>({
   handleClose,
-  isError,
-  isSuccess,
   loading,
   onYes,
   open,
@@ -27,16 +23,11 @@ const ModalDelete = <T,>({
   item,
   name,
 }: Props<T>) => {
-  useEffect(() => {
-    if (!isError && isSuccess && !loading) {
-      handleClose();
-    }
-  }, [handleClose, isError, isSuccess, loading]);
-
   if (!item) return null;
 
-  const handleOnYes = (item: T) => {
-    onYes(item);
+  const handleOnYes = async (item: T) => {
+    await onYes(item);
+    handleClose();
   };
 
   return (
