@@ -8,7 +8,7 @@ export function LoadingLayout() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const url = `${pathname}?${searchParams}`;
+    /* const url = `${pathname}?${searchParams}`; */
     // You can now use the current URL
     // ...
   }, [pathname, searchParams]);
