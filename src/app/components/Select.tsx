@@ -11,6 +11,7 @@ type Props = {
   value: string;
   label: string;
   placeholder: string;
+  description?: string;
 };
 
 const Select = ({
@@ -21,12 +22,13 @@ const Select = ({
   value,
   label,
   placeholder,
+  description,
 }: Props) => {
   if (isLoading) return <Loader />;
 
   return (
-    <div className="flex flex-col">
-      <label htmlFor={name} className="text-white">
+    <div className="flex flex-col w-full">
+      <label htmlFor={name} className="text-white mb-1">
         {label}
       </label>
       <select
@@ -43,6 +45,9 @@ const Select = ({
           </option>
         ))}
       </select>
+      {description && (
+        <small className=" text-neutral-500 mt-1">{description}</small>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from "react";
 
 interface IUseForm<T> {
   initialState: T;
@@ -27,10 +27,9 @@ const useForm = <T>({ initialState }: IUseForm<T>) => {
     }
   };
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     setFormData(initialState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   return { handleChange, formData, handleReset, setFormData };
 };

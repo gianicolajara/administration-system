@@ -75,7 +75,9 @@ const Create = () => {
         <div className="mb-4">
           <SubTitle>Facturas</SubTitle>
         </div>
-        <section className="grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2">
+        <section
+          className={`grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2 transition-all`}
+        >
           <FormCreateBill
             formData={formData}
             handleChange={handleChange}

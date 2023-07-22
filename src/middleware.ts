@@ -9,5 +9,6 @@ export const config = {
     "/api/signup/:path*",
     "/api/users/:path*",
     "/api/currency/:path*",
+    "/api/configuration/:path*",
   ],
 };

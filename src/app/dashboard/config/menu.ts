@@ -4,6 +4,7 @@ import { BiMoney } from "react-icons/bi";
 import { BsNutFill } from "react-icons/bs";
 import { CiMoneyBill } from "react-icons/ci";
 import { FaExchangeAlt } from "react-icons/fa";
+import { GrConfigure } from "react-icons/gr";
 
 export const menuItems: Array<MenuItemDashboard> = [
   {
@@ -27,16 +28,22 @@ export const menuItems: Array<MenuItemDashboard> = [
     Icon: BsNutFill,
     subitems: [
       {
-        id: 4,
+        id: 1,
         title: "Monedas",
         url: "/dashboard/configuration/currency",
         Icon: BiMoney,
       },
       {
-        id: 5,
+        id: 2,
         title: "Cambios",
         url: "/dashboard/configuration/changes",
         Icon: FaExchangeAlt,
+      },
+      {
+        id: 3,
+        title: "Generales",
+        url: "/dashboard/configuration/generals",
+        Icon: GrConfigure,
       },
     ],
   },
