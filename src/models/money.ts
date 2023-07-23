@@ -6,6 +6,7 @@ const MoneySchema = new Schema<IMoney, IMoneyModel>(
     name: {
       type: String,
       required: true,
+      unique: true,
     },
     delete: {
       type: Boolean,

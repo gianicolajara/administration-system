@@ -76,7 +76,8 @@ const FormCurrency = ({
         theme: "dark",
       });
     }
-  }, [errorUpdate, handleReset, isErrorUpdate, isSuccessUpdate]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [errorUpdate, isErrorUpdate, isSuccessUpdate]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

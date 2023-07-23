@@ -73,6 +73,7 @@ const FormCreateBill = ({
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     if (formData.id) {
       updateBill({
         id: formData.id,

@@ -53,7 +53,7 @@ const FormChanges = ({ formData, handleChange, handleReset }: Props) => {
         id: formData.id,
         change: {
           ...formData,
-          amount: parseInt(formData.amount as string),
+          amount: parseFloat(formData.amount as string),
         },
       });
     } else {

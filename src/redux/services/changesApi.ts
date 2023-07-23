@@ -47,6 +47,9 @@ export const changesApi = createApi({
           "Content-type": "application/json",
         },
       }),
+      transformErrorResponse: (baseQueryReturnValue) => {
+        return baseQueryReturnValue?.data;
+      },
     }),
     deleteChange: builder.mutation({
       invalidatesTags: ["Changes"],

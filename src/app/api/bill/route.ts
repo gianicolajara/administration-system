@@ -96,6 +96,7 @@ export const POST = async (request: Request) => {
         ? await Changes.findOne<IChanges>({
             from: billTypeMoney?.id,
             to: configuration.change.id,
+            delete: false,
           }).exec()
         : 1;
 

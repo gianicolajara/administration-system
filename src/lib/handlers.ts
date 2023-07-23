@@ -4,6 +4,8 @@ import { MongoError } from "mongodb";
 import { NextResponse } from "next/server";
 
 export const onError = (error: any) => {
+  console.log(error);
+
   if (error.name === "MongoServerError") {
     if ((error as MongoError).code === 11000) {
       return NextResponse.json(

@@ -14,6 +14,8 @@ export const PUT = async (
     db.connectDB();
 
     const body: Partial<IChanges> = await request.json();
+    console.log({ body });
+    console.log(params.id);
 
     if (!body.amount || !body.from || !body.to) {
       return NextResponse.json(
@@ -31,6 +33,8 @@ export const PUT = async (
       message: "Cambio actualizado correctamente",
     });
   } catch (error) {
+    console.log(error);
+
     return onError(error);
   }
 };
