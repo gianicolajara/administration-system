@@ -13,6 +13,7 @@ export interface IBill {
   createAt?: Date;
   updateAt?: Date;
   user: string | Schema.Types.ObjectId;
+  changeAmount?: number;
 }
 
 export interface IBillResponse {
@@ -26,6 +27,7 @@ export interface IBillResponse {
   user: IUser;
   createAt?: Date;
   updateAt?: Date;
+  changeAmount?: number;
 }
 
 export interface IBillModel extends Model<IBill> {}

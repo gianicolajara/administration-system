@@ -1,5 +1,5 @@
 import { Model, Schema } from "mongoose";
-import { IChangesResponse } from "./changes";
+import { IMoney } from "./money";
 
 export interface IConfiguration {
   id?: string | Schema.Types.ObjectId;
@@ -8,7 +8,7 @@ export interface IConfiguration {
 
 export interface IConfigurationResponse {
   id?: string;
-  change: IChangesResponse;
+  change: IMoney;
 }
 
 export interface IModelConfiguration extends Model<IConfiguration> {}

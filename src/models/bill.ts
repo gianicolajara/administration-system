@@ -46,6 +46,10 @@ const BillSchema = new Schema<IBill, IBillModel>(
     updateAt: {
       type: Date,
     },
+    changeAmount: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,

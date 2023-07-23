@@ -2,7 +2,7 @@ import Table from "@/app/components/Table";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { BodyData, Head } from "@/types/types/table";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import ItemBill from "./ItemBill";
 
 type Props = {
@@ -15,6 +15,7 @@ type Props = {
   onChangeDatePicker?: Dispatch<SetStateAction<Value>>;
   setModalDataDelete: Dispatch<SetStateAction<IBillResponse | undefined>>;
   handleOpenDelete: () => void;
+  plugins: ReactNode;
 };
 
 const TableBilles = ({
@@ -27,6 +28,7 @@ const TableBilles = ({
   valueDatePicker,
   handleOpenDelete,
   setModalDataDelete,
+  plugins,
 }: Props) => {
   const generateHead = (): Array<Head> => {
     return [
@@ -95,6 +97,7 @@ const TableBilles = ({
       isLoading={loading}
       pagination={true}
       amountPage={5}
+      plugins={plugins}
     />
   );
 };

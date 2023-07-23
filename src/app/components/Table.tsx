@@ -4,6 +4,7 @@ import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import {
   ChangeEvent,
   Dispatch,
+  ReactNode,
   SetStateAction,
   isValidElement,
   useMemo,
@@ -27,6 +28,7 @@ export type Props = {
   pagination?: boolean;
   amountPage?: number;
   className?: string;
+  plugins?: ReactNode;
 };
 
 const Table = ({
@@ -39,6 +41,7 @@ const Table = ({
   isLoading,
   pagination = false,
   amountPage = 0,
+  plugins,
 }: Props) => {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
@@ -110,6 +113,8 @@ const Table = ({
               ))
           : null}
       </div>
+
+      <div className="w-full mb-4 flex flex-wrap">{plugins}</div>
 
       <div className="overflow-x-auto w-full">
         <table className="table-auto w-full text-left p-4 border-neutral-800 border-collapse text-white">

@@ -8,9 +8,11 @@ import {
   useDeleteBillMutation,
   useGetAllBillesQuery,
 } from "@/redux/services/billApi";
+import { useGetConfigurationQuery } from "@/redux/services/configurationApi";
 import { IBill, IBillResponse } from "@/types/interfaces/bill";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import { useEffect, useState } from "react";
+import CreateExcel from "./Components/CreateExcel";
 import FormCreateBill from "./Components/FormCreateBill";
 import ModalBill from "./Components/ModalBill";
 import TableBilles from "./Components/TableBilles";
@@ -52,6 +54,9 @@ const Create = () => {
 
   const [deleteChange, { isLoading: deleteLoading }] = useDeleteBillMutation();
 
+  const { isLoading: configurationLoading, data: dataConfiguration } =
+    useGetConfigurationQuery();
+
   return (
     <>
       <ModalDelete<IBillResponse>
@@ -75,6 +80,7 @@ const Create = () => {
         <div className="mb-4">
           <SubTitle>Facturas</SubTitle>
         </div>
+
         <section
           className={`grid grid-cols-1 grid-rows-[auto,_auto] lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-2 gap-y-2 transition-all`}
         >
@@ -94,6 +100,15 @@ const Create = () => {
             onChangeDatePicker={setMultiPickerValue}
             handleOpenDelete={handleOpenDelete}
             setModalDataDelete={setSaveDataDelete}
+            plugins={
+              <CreateExcel
+                configurationLoading={configurationLoading}
+                dataLoading={isLoading}
+                data={data}
+                dataConfiguration={dataConfiguration}
+                dates={multiPickerValue}
+              />
+            }
           />
         </section>
       </section>

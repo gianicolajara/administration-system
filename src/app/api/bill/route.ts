@@ -1,7 +1,12 @@
 import dbConfig from "@/lib/dbConntect";
 import { onError } from "@/lib/handlers";
 import Bill from "@/models/bill";
+import Changes from "@/models/changes";
+import Configuration from "@/models/configurations";
+import Money from "@/models/money";
 import { IBill } from "@/types/interfaces/bill";
+import { IChanges } from "@/types/interfaces/changes";
+import { IConfigurationResponse } from "@/types/interfaces/configuration";
 import { NextResponse } from "next/server";
 
 export const revalidate = 0;
@@ -37,7 +42,6 @@ export const GET = async (request: Request) => {
       }
     );
   } catch (error) {
-    console.error(error);
     return onError(error);
   }
 };
@@ -69,7 +73,50 @@ export const POST = async (request: Request) => {
       );
     }
 
-    const newBill = new Bill(body);
+    const configuration = (await Configuration.findOne({}).populate(
+      "change"
+    )) as IConfigurationResponse;
+
+    if (!configuration?.change?.id) {
+      return NextResponse.json(
+        {
+          message:
+            "Necesita configurar la moneda a usar para calcular totales de factura",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const billTypeMoney = await Money.findById(body.typeOfCurrency);
+
+    const changeAmount =
+      billTypeMoney?.id !== configuration.change.id
+        ? await Changes.findOne<IChanges>({
+            from: billTypeMoney?.id,
+            to: configuration.change.id,
+          }).exec()
+        : 1;
+
+    if (!changeAmount) {
+      return NextResponse.json(
+        {
+          message: "Necesita configurar los tipos de cambio correctamente",
+        },
+        {
+          status: 400,
+        }
+      );
+    }
+
+    const newBill = new Bill({
+      ...body,
+      changeAmount:
+        billTypeMoney?.id !== configuration.change.id
+          ? ((changeAmount as IChanges).amount as number)
+          : (changeAmount as number),
+    });
 
     await newBill.save();
 
