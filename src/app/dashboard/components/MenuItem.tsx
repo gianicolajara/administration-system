@@ -41,7 +41,11 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
                 : ""
             }`}
           >
-            <item.Icon className="lg:hidden" size={20} color="text-white" />
+            <item.Icon
+              className="lg:hidden text-white"
+              size={20}
+              color="white"
+            />
             <P className="hidden lg:flex">{item.title}</P>
             {item.subitems ? (
               openItemMenu ? (
@@ -61,7 +65,7 @@ const MenuItem = ({ item, handleActiveItem, activeItem }: Props) => {
               : ""
           }`}
         >
-          <item.Icon className="lg:hidden" size={20} color="text-white" />
+          <item.Icon className="lg:hidden text-white" size={20} color="white" />
           <P className="hidden lg:flex">{item.title}</P>
           {item.subitems ? (
             openItemMenu ? (

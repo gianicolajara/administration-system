@@ -1,7 +1,9 @@
 "use client";
 
+import SubTitle from "../components/SubTitle";
+
 const Dashboard = () => {
-  return <div>dashboard</div>;
+  return <SubTitle>Dashboard</SubTitle>;
 };
 
 export default Dashboard;
