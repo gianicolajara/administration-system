@@ -3,6 +3,8 @@ import Configuration from "@/models/configurations";
 import { IConfiguration } from "@/types/interfaces/configuration";
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export const GET = async () => {
   try {
     const configurations = await Configuration.findOne({}).populate("change");
