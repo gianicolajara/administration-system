@@ -1,5 +1,9 @@
 import { IChanges, IChangesResponse } from "@/types/interfaces/changes";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from "@reduxjs/toolkit/query/react";
 import { urlApi } from "./config";
 
 export const changesApi = createApi({
@@ -47,7 +51,7 @@ export const changesApi = createApi({
           "Content-type": "application/json",
         },
       }),
-      transformErrorResponse: (baseQueryReturnValue) => {
+      transformErrorResponse: (baseQueryReturnValue: FetchBaseQueryError) => {
         return baseQueryReturnValue?.data;
       },
     }),

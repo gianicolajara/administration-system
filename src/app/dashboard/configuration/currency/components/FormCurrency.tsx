@@ -3,6 +3,10 @@ import Form from "@/app/components/Form";
 import Button from "@/app/dashboard/components/Button";
 import InputText from "@/app/dashboard/components/InputText";
 import {
+  httpErrorMessageHandle,
+  httpSuccessMessageHandle,
+} from "@/lib/alertHttp";
+import {
   useCreateCurrencyMutation,
   useUpdateCurrencyMutation,
 } from "@/redux/services/currencyApi";
@@ -14,7 +18,6 @@ import {
   SetStateAction,
   useEffect,
 } from "react";
-import { toast } from "react-toastify";
 
 type Props = {
   // eslint-disable-next-line no-unused-vars
@@ -45,36 +48,24 @@ const FormCurrency = ({
 
   useEffect(() => {
     if (isSuccess && !isError) {
-      toast("Creación de la moneda exitosa", {
-        type: "success",
-        theme: "dark",
-      });
+      httpSuccessMessageHandle("Creación de la moneda exitosa");
       handleReset();
     }
 
     if (!isSuccess && isError) {
-      toast(JSON.stringify(error), {
-        type: "error",
-        theme: "dark",
-      });
+      httpErrorMessageHandle(error);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, error, isError, setFormData]);
 
   useEffect(() => {
     if (isSuccessUpdate && !isErrorUpdate) {
-      toast("Modificación de la moneda exitosa", {
-        type: "success",
-        theme: "dark",
-      });
+      httpSuccessMessageHandle("Modificación de la moneda exitosa");
       handleReset();
     }
 
     if (!isSuccessUpdate && isErrorUpdate) {
-      toast(JSON.stringify(errorUpdate), {
-        type: "error",
-        theme: "dark",
-      });
+      httpErrorMessageHandle(errorUpdate);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errorUpdate, isErrorUpdate, isSuccessUpdate]);

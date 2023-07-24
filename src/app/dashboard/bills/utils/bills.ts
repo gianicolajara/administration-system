@@ -56,8 +56,6 @@ export const generateTotal = (
   item: IBillResponse,
   billChange: IChangesResponse
 ) => {
-  console.log(billChange);
-
   if (billChange?.amount > 1) {
     return item.assets === AssetsEnum.Ingreso
       ? item.amountMoney * (billChange?.amount as number)

@@ -4,14 +4,12 @@ import { MongoError } from "mongodb";
 import { NextResponse } from "next/server";
 
 export const onError = (error: any) => {
-  console.log(error);
-
   if (error.name === "MongoServerError") {
     if ((error as MongoError).code === 11000) {
       return NextResponse.json(
         {
           success: false,
-          message: (error as MongoError).message,
+          message: "Este valor ya existe, hay una llave duplicada",
         },
         {
           status: 400,

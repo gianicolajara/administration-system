@@ -2,8 +2,6 @@ import { IMoney } from "@/types/interfaces/money";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { urlApi } from "./config";
 
-
-
 export const currencyApi = createApi({
   reducerPath: "currencyApi",
   baseQuery: fetchBaseQuery({ baseUrl: urlApi }),
@@ -35,6 +33,9 @@ export const currencyApi = createApi({
         },
         body: arg,
       }),
+      transformErrorResponse: (baseQueryReturnValue) => {
+        return baseQueryReturnValue?.data;
+      },
     }),
     updateCurrency: build.mutation({
       invalidatesTags: ["Currency"],
