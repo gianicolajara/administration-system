@@ -1,6 +1,9 @@
+import { httpErrorMessageHandle } from "@/lib/alertHttp";
 import { formatDateYYYYmmdd } from "@/lib/formatDate";
+import { useGetAllChangesQuery } from "@/redux/services/changesApi";
 import { AssetsEnum, BillsEnum } from "@/types/enums/dashboard";
 import { IBillResponse } from "@/types/interfaces/bill";
+import { IChangesResponse } from "@/types/interfaces/changes";
 import { IConfigurationResponse } from "@/types/interfaces/configuration";
 import { Value } from "@wojtekmaj/react-daterange-picker/dist/cjs/shared/types";
 import NProgress from "nprogress";
@@ -8,6 +11,7 @@ import { useState } from "react";
 import * as XLSX from "xlsx";
 import Button from "../../components/Button";
 import Loader from "../../components/Loader";
+import { generateTotal } from "../utils/bills";
 
 type Props = {
   data?: Array<IBillResponse>;
@@ -26,7 +30,10 @@ const CreateExcel = ({
 }: Props) => {
   const [loading, setLoading] = useState(false);
 
-  if (configurationLoading || dataLoading) return <Loader />;
+  const { data: dataChanges, isLoading: loadingChanges } =
+    useGetAllChangesQuery("Changes");
+
+  if (configurationLoading || dataLoading || loadingChanges) return <Loader />;
 
   if (!data || data.length <= 1 || !dataConfiguration) {
     return <Button>No es posible crear un fichero excel</Button>;
@@ -42,6 +49,8 @@ const CreateExcel = ({
     const sizeWhite = 1;
     const sizeMargin = 1;
     let moneyObject: { [key: string]: number } = {};
+
+    const currencyConfigurationId = dataConfiguration.change.id;
 
     const totalCurrencies = data?.reduce((acc, cur) => {
       return {
@@ -59,27 +68,43 @@ const CreateExcel = ({
     const keyCurrenciesArray = Object.entries(totalCurrencies as object);
 
     const content =
-      data?.map((item) => ({
-        "Numero de Factura": item.billNumber,
-        "Usuario": item.user.username,
-        "Fecha Creado": formatDateYYYYmmdd(item.createAt as Date),
-        "Reporte": item.report,
-        "Tipo": BillsEnum[item.billType],
-        "Activos": AssetsEnum[item.assets],
-        "Cantidad dinero":
-          item.assets === AssetsEnum.Ingreso
-            ? item.amountMoney
-            : -Math.abs(item.amountMoney),
-        "Moneda": item.typeOfCurrency.name,
-        [`Total en ${dataConfiguration?.change.name}`]:
-          (item.changeAmount as number) >= 1
-            ? item.assets === AssetsEnum.Ingreso
-              ? item.amountMoney / (item.changeAmount as number)
-              : -Math.abs(item.amountMoney / (item.changeAmount as number))
-            : item.assets === AssetsEnum.Ingreso
-            ? item.amountMoney * (item.changeAmount as number)
-            : -Math.abs(item.amountMoney * (item.changeAmount as number)),
-      })) ?? [];
+      data?.map((item) => {
+        const billChange = dataChanges?.find((change) => {
+          return (
+            change.from.id === item.typeOfCurrency.id &&
+            change.to.id === currencyConfigurationId
+          );
+        });
+
+        if (!billChange) {
+          httpErrorMessageHandle({
+            message:
+              "No existe una configuracion valida en sus cambios de moneda",
+          });
+          setLoading(false);
+          throw new Error(
+            "No existe una configuracion valida en sus cambios de moneda"
+          );
+        }
+
+        return {
+          "Numero de Factura": item.billNumber,
+          "Usuario": item.user.username,
+          "Fecha Creado": formatDateYYYYmmdd(item.createAt as Date),
+          "Reporte": item.report,
+          "Tipo": BillsEnum[item.billType],
+          "Activos": AssetsEnum[item.assets],
+          "Cantidad dinero":
+            item.assets === AssetsEnum.Ingreso
+              ? item.amountMoney
+              : -Math.abs(item.amountMoney),
+          "Moneda": item.typeOfCurrency.name,
+          [`Total en ${dataConfiguration?.change.name}`]: generateTotal(
+            item,
+            billChange as IChangesResponse
+          ),
+        };
+      }) ?? [];
 
     const indexToTotal = content.length + sizeHeader + sizeWhite + sizeMargin;
     const indexTotalChange = content.length + sizeHeader + sizeWhite;

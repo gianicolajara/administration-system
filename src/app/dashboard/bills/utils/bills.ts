@@ -1,5 +1,6 @@
-import { BillsEnum } from "@/types/enums/dashboard";
-import { IBill } from "@/types/interfaces/bill";
+import { AssetsEnum, BillsEnum } from "@/types/enums/dashboard";
+import { IBill, IBillResponse } from "@/types/interfaces/bill";
+import { IChangesResponse } from "@/types/interfaces/changes";
 import { IMoney } from "@/types/interfaces/money";
 import { BillsType } from "@/types/types/dashboard";
 import { ItemSelect } from "@/types/types/select";
@@ -49,4 +50,29 @@ export const createSelectItems = (data: Array<IMoney>): Array<ItemSelect> => {
     label: item.name,
     value: item.id as string,
   }));
+};
+
+export const generateTotal = (
+  item: IBillResponse,
+  billChange: IChangesResponse
+) => {
+  console.log(billChange);
+
+  if (billChange?.amount > 1) {
+    return item.assets === AssetsEnum.Ingreso
+      ? item.amountMoney * (billChange?.amount as number)
+      : -Math.abs(item.amountMoney * (billChange?.amount as number));
+  }
+
+  if (billChange.amount === 1) {
+    return item.assets === AssetsEnum.Ingreso
+      ? item.amountMoney
+      : -Math.abs(item.amountMoney);
+  }
+
+  if (billChange.amount < 1) {
+    return item.assets === AssetsEnum.Ingreso
+      ? item.amountMoney * (billChange?.amount as number)
+      : -Math.abs(item.amountMoney * (billChange?.amount as number));
+  }
 };
